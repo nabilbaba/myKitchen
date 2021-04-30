@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+<script src="{{ asset('js/app.js') }}"></script>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,7 +17,9 @@
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assetsAdmin/css/argon.css?v=1.2.0" type="text/css">
-  
+  <script src="{{ asset('js/vue.js') }}"></script>
+  <script src="{{ asset('js/axios.min.js') }}"></script>
+
   <?php
 
          $stripeStatistiques=$stripePubs=$stripePubs=$stripeIcons=$stripeProfile=$stripeUsers=$stripeRecipes=$stripeCatego='';
@@ -150,9 +152,12 @@
         </div>
       </footer>
     </div>
+    
+   @stack('javascripts') 
   </div>
-  
 
+   
+  
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="assetsAdmin/vendor/jquery/dist/jquery.min.js"></script>

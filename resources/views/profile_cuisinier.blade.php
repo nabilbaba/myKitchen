@@ -136,7 +136,7 @@
                   <div class="row ">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label " for="input-username">Phone number</label>
+                        <label class="form-control-label " for="input-number">Phone number</label>
                         <input type="numero" id="input-number" class="form-control bg-default shadow" placeholder="phone number" disabled>
                       </div>
                     </div>
@@ -170,8 +170,8 @@
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-sex">Postal code</label>
-                        <input type="numero" id="input-code_postal" class="form-control bg-default shadow" placeholder="Postal code" disabled>
+                        <label class="form-control-label" for="input-code-postal">Postal code</label>
+                        <input type="numero" id="input-code-postal" class="form-control bg-default shadow" placeholder="Postal code" disabled>
                       </div>
                     </div>
                   </div>

@@ -25,5 +25,13 @@ class HomeController extends Controller
     {
         return view('myKitchen_visiteur');
     }
+    public function index2()
+    {
+        return view('profile_admin');
+    }
+    public function index3()
+    {
+        return view('profile_cuisinier');
+    }
     
 }

@@ -5,8 +5,9 @@
 <head><title>Profile</title></head>
   
     <!-- Topnav -->
+   
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-default border-bottom">
-      <div class="container-fluid ">
+      <div class="container-fluid " >
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <!-- Search form -->
           <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
@@ -49,7 +50,7 @@
                     <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">Babaahmed Nabil</span>
+                    <span class="mb-0 text-sm  font-weight-bold">{{ $admin->first_name }} {{ $admin->last_name }}</span>
                   </div>
                 </div>
               </a>
@@ -90,7 +91,7 @@
       </div>
     </div>
     <!-- Page content -->
-    <div class="container-fluid mt--6">
+    <div class="container-fluid mt--6" id="app">
       <div class="row">
         <div class="col-xl-4 order-xl-2">
           <div class="card card-profile bg-default shadow " style="margin-top: -30px;">
@@ -104,13 +105,21 @@
                 </div>
               </div>
             </div>
-            <div class="card-body pt-0 text-white">
+            <div class="card-body pt-0 text-white" >
               <div class="text-center " style="margin-top: 100px;">
                 <h5 class="h3 text-white">
-                  Babaahmed Nabil<span class="font-weight-light">,22</span>
+                  @{{ profiladmin.first_name }} @{{ profiladmin.last_name }} 
+                  <span class="font-weight-light">
+                    @php
+                       $birthday = $admin->date_of_birth;
+                        $age = Carbon\Carbon::parse($birthday)->diff(Carbon\Carbon::now())->format(',%y years');
+                     @endphp
+
+                      {{$age}}
+                  </span>
                 </h5>
                 <div class="h5 font-weight-300 text-white">
-                  <i class="ni location_pin mr-2 "></i>Tlemcen, Algerie
+                  <i class="ni location_pin mr-2 "></i>@{{ profiladmin.adresse }}, Algerie
                 </div>
                 <div class="h5 mt-4 text-white">
                   <i class="ni business_briefcase-24 mr-2 "></i>Web application development, site creation
@@ -132,20 +141,31 @@
               </div>
             </div>
             <div class="card-body ">
-              <form>
-                <h6 class="heading-small text-muted mb-4">User Information</h6>
+              
+             <!-- formulaire d'affichage -->
+              <form v-if="show">
+                <div class="row">
+                  <div class="col-md-8">    
+                     <h6 class="heading-small text-muted mb-4">
+                       Admin Information
+                     </h6>
+                  </div>
+                  <div class="col-md-4 text-right">
+                     <button class="btn btn-outline-warning btn-sm"  v-on:click="editProfile(profile_ad)">Edit profile</button>
+                  </div>
+                </div>
                 <div class="pl-lg-4 ">
                   <div class="row ">
                     <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label " for="input-username">Username</label>
-                        <input type="text" id="input-username" class="form-control bg-default shadow" placeholder="Username" value="lucky.jesse">
+                        <label class="form-control-label " for="input-number">Phone number</label>
+                        <input type="numero" id="input-number" class="form-control bg-default shadow color-input border-input" placeholder="phone number" v-model="profiladmin.num" value="{{old('num')}}" disabled >
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control bg-default shadow" placeholder="jesse@example.com">
+                        <input type="email" id="input-email" class="form-control bg-default shadow color-input border-input" placeholder="email" v-model="profiladmin.email" value="{{old('email')}}" disabled>
                       </div>
                     </div>
                   </div>
@@ -153,13 +173,27 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">First name</label>
-                        <input type="text" id="input-first-name" class="form-control bg-default shadow" placeholder="First name" value="Lucky">
+                        <input type="text" id="input-first-name" class="form-control bg-default shadow color-input border-input" placeholder="First name" v-model="profiladmin.first_name" value="{{old('first_name')}}" disabled>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-last-name">Last name</label>
-                        <input type="text" id="input-last-name" class="form-control bg-default shadow" placeholder="Last name" value="Jesse">
+                        <input type="text" id="input-last-name" class="form-control bg-default shadow color-input border-input" placeholder="Last name" v-model="profiladmin.last_name" value="{{old('last_name')}}" disabled>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-date">Date of birth</label>
+                        <input type="Date" id="input-date" class="form-control bg-default shadow color-input border-input" placeholder="Date of birth" v-model="profiladmin.date_of_birth" value="{{old('date_of_birth')}}" disabled>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-code-postal">Postal code</label>
+                        <input type="numero" id="input-code_postal" class="form-control bg-default shadow color-input border-input " placeholder="Postal code" v-model="profiladmin.code_postal" value="{{old('code_postal')}}" disabled>
                       </div>
                     </div>
                   </div>
@@ -169,30 +203,90 @@
                 <h6 class="heading-small text-muted mb-4">Contact information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-10">
                       <div class="form-group">
                         <label class="form-control-label" for="input-address">Address</label>
-                        <input id="input-address" class="form-control bg-default shadow" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
+                        <input id="input-address" class="form-control bg-default shadow color-input border-input" placeholder="Home Address"  type="text" v-model="profiladmin.adresse" value="{{old('adresse')}}" disabled >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4" />
+                <!-- Description -->
+                <h6 class="heading-small text-muted mb-4">About me</h6>
+                <div class="pl-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="textarea-about">About Me</label>
+                    <textarea id="textarea-about" rows="4" class="form-control bg-default shadow color-input border-input" >web site devloper</textarea>
+                  </div>
+                </div>
+              </form>
+          
+          <!-- formulaire de la modification -->
+              <form v-if="voir">
+                <div class="row">
+                  <div class="col-md-8">    
+                     <h6 class="heading-small text-muted mb-4">
+                       Admin Information
+                     </h6>
+                  </div>
+                  <div class="col-md-4 text-right" >
+                     <button class="btn btn-outline-success btn-sm "   v-on:click="update_profile(profiladmin)">save</button>
+                  </div>
+                </div> 
+                <div class="pl-lg-4 ">
+                  <div class="row ">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label " for="input-number">Phone number</label>
+                        <input type="numero" id="input-number" class="form-control bg-default shadow " placeholder="phone number" v-model="profiladmin.num" value="{{old('num')}}" >
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-email">Email address</label>
+                        <input type="email" id="input-email" class="form-control bg-default shadow " placeholder="email" v-model="profiladmin.email" value="{{old('email')}}" >
                       </div>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-city">City</label>
-                        <input type="text" id="input-city" class="form-control bg-default shadow" placeholder="City" value="New York">
+                        <label class="form-control-label" for="input-first-name">First name</label>
+                        <input type="text" id="input-first-name" class="form-control bg-default shadow " placeholder="First name" v-model="profiladmin.first_name" value="{{old('first_name')}}" >
                       </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-country">Country</label>
-                        <input type="text" id="input-country" class="form-control bg-default shadow" placeholder="Country" value="United States">
+                        <label class="form-control-label" for="input-last-name">Last name</label>
+                        <input type="text" id="input-last-name" class="form-control bg-default shadow " placeholder="Last name" v-model="profiladmin.last_name" value="{{old('last_name')}}" >
                       </div>
                     </div>
-                    <div class="col-lg-4">
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
                       <div class="form-group">
-                        <label class="form-control-label" for="input-country">Postal code</label>
-                        <input type="number" id="input-postal-code" class="form-control bg-default shadow" placeholder="Postal code">
+                        <label class="form-control-label" for="input-date">Date of birth</label>
+                        <input type="Date" id="input-date" class="form-control bg-default shadow " placeholder="Date of birth" v-model="profiladmin.date_of_birth" value="{{old('date_of_birth')}}" >
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-code-postal">Postal code</label>
+                        <input type="numero" id="input-code_postal" class="form-control bg-default shadow  " placeholder="Postal code" v-model="profiladmin.code_postal" value="{{old('code_postal')}}" >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4" />
+                <!-- Address -->
+                <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-md-10">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-address">Address</label>
+                        <input id="input-address" class="form-control bg-default shadow " placeholder="Home Address"  type="text" v-model="profiladmin.adresse" value="{{old('adresse')}}">
                       </div>
                     </div>
                   </div>
@@ -203,7 +297,7 @@
                 <div class="pl-lg-4">
                   <div class="form-group">
                     <label class="form-control-label">About Me</label>
-                    <textarea rows="4" class="form-control bg-default shadow" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                    <textarea rows="4" class="form-control bg-default shadow " placeholder="web site developer "></textarea>
                   </div>
                 </div>
               </form>
@@ -212,8 +306,91 @@
         </div>
       </div>
 
-
- 
-
-
 @endsection
+
+
+@push('javascripts')
+
+<script>
+        window.Laravel = {!! json_encode([
+               'csrfToken' => csrf_token(),
+                'admin'  => $admin,
+                
+                'url'      => url('/')  
+          ]) !!};
+</script>
+<script>
+   var app = new Vue({
+
+    el: '#app',
+    data:{
+        profiladmin: [],
+        profile_ad: {
+          id: 0,
+          user_id: window.Laravel.idUser,
+          first_name: '',
+          last_name: '',
+          email: '',
+          num: '',
+          date_of_birth: '',
+          code_postal: '',
+          adresse: '',
+
+        },
+        voir: false,
+        show: true,
+      },
+      methods: {
+        
+        profile_admin: function(){
+          axios.get(window.Laravel.url+'/profileA')
+
+              .then(response => {
+                   console.log('success : ', response);
+                   this.profiladmin = window.Laravel.admin;
+              })
+              .catch(error =>{
+                   console.log('errors :' , error);
+              })
+        },
+        editProfile: function(profile_ad){
+          this.show = false;
+          this.voir = true; 
+          this.profile_ad = profile_ad;
+        },
+        update_profile: function(p){
+          axios.put(window.Laravel.url+"/updateprofile/"+p.id,this.profile_ad)
+          
+            .then(response => {
+              if(response.data.etat){
+               
+                 this.profile_ad = {
+                      id: 0,
+                      user_id: window.Laravel.idUser,  
+                      first_name: '',
+                      last_name: '',
+                      email: '',
+                      num: '',
+                      date_of_birth: '',
+                      code_postal: '',
+                      adresse: '',
+                  };
+
+              }
+              
+                 
+            })
+            .catch(error =>{
+                console.log('errors :' , error);
+            })
+
+      } 
+        
+    },
+    created:function(){
+      this.profile_admin();
+    },
+  });
+</script>
+
+@endpush

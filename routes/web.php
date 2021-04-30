@@ -22,9 +22,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 
-Route::get('/profileA', function () {
-    return view('profile_admin');
-})->name('profileA');
+Route::get('/profileA','AdminController@profile_admin')->name('profileA');
+
+Route::put('/updateprofile/{id}','AdminController@updateProfile')->name('updateprofile');
 
 Route::get('/statistiques', function () {
     return view('statistiques_admin');
@@ -55,9 +55,7 @@ Route::get('/activerLesComptes', function () {
 })->name('activerLesComptes');
 
 //=======================================//
-Route::get('/profileC', function () {
-    return view('profile_cuisinier');
-})->name('profileC');
+Route::get('/profileC','HomeController@index3')->name('profileC');
 
 Route::get('/recettesC', function () {
     return view('recettes_cuisinier');

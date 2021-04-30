@@ -24,6 +24,7 @@ class CreateCuisiniersTable extends Migration
             $table->string('code_postal');
             $table->string('adresse');
             $table->timestamps();
+            $table->softDeletes();
         });
          DB::statement("ALTER TABLE `cuisiniers` ADD UNIQUE `unique_cuisinier`(`num`, `email`)");
     }

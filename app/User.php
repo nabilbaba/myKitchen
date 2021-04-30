@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'num', 'email','type_compte','password',
+        'num', 'email','type_compte','password','created_at','updated_at',
     ];
 
     /**
@@ -41,5 +41,10 @@ class User extends Authenticatable
     public function cuisinier()
     {
         return $this->belongsTo('App\Cuisinier');
+    }
+
+    public function admin()
+    {
+        return $this->belongsTo('App\Admin');
     }
 }

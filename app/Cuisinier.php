@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Cuisinier extends Model
@@ -9,7 +10,7 @@ class Cuisinier extends Model
 	
 
     protected $fillable = [
-        'user_id','first_name','last_name','email','num','date_of_birth','code_postal','adresse','created_at','updated_at',
+        'user_id','first_name','last_name','email','num','date_of_birth','code_postal','adresse','created_at','updated_at','deleted_at',
     ];
 
     public function user()

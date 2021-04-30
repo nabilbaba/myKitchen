@@ -326,7 +326,7 @@ textarea
     font-family: inherit;
     font-size: inherit;
     line-height: inherit; 
-
+    
     margin: 0;
 }
 
@@ -29841,4 +29841,13 @@ input.datetimepicker[data-color='yellow'] + .bootstrap-datetimepicker-widget.dro
 .bootstrap-datetimepicker-widget.dropdown-black table td .btn[data-action='togglePeriod']
 {
     background: transparent;
+}
+
+.color-input{
+
+    color: white;
+
+}
+.border-input{
+    border:none ;
 }
