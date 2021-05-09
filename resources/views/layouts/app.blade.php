@@ -94,9 +94,9 @@
                         </ul> -->
                     <!-- </li> -->
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                    @guest
+                    
                     <li><a class="nav-link scrollto" href="{{route('login')}}">Login</a></li>
-                    @endguest
+                    
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>

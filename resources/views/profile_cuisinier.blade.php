@@ -47,7 +47,7 @@
                     <img alt="Image placeholder" src="assetsCuisinier/img/theme/bootstrap.jpg">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">Belaskri Moncef</span>
+                    <span class="mb-0 text-sm  font-weight-bold">{{$cuisinier->first_name}} {{$cuisinier->last_name}}</span>
                   </div>
                 </div>
               </a>
@@ -88,7 +88,7 @@
       </div>
     </div>
     <!-- Page content -->
-    <div class="container-fluid mt--6">
+    <div class="container-fluid mt--6" id="app">
       <div class="row">
         <div class="col-xl-4 order-xl-2">
           <div class="card card-profile bg-default shadow " style="margin-top: -30px;">
@@ -105,10 +105,15 @@
             <div class="card-body pt-0 text-white">
               <div class="text-center " style="margin-top: 100px;">
                 <h5 class="h3 text-white">
-                  Belaskri Moncef<span class="font-weight-light">,22</span>
+                  @{{ profilcuisinier.first_name }} @{{ profilcuisinier.last_name }}<span class="font-weight-light"> @php
+                       $birthday = $cuisinier->date_of_birth;
+                        $age = Carbon\Carbon::parse($birthday)->diff(Carbon\Carbon::now())->format(',%y years');
+                     @endphp
+
+                      {{$age}}</span>
                 </h5>
                 <div class="h5 font-weight-300 text-white">
-                  <i class="ni location_pin mr-2 "></i>Tlemcen, Algerie
+                  <i class="ni location_pin mr-2 "></i>@{{profilcuisinier.adresse}}, Algerie
                 </div>
                 <div class="h5 mt-4 text-white">
                   <i class="ni business_briefcase-24 mr-2 "></i>Web application development, site creation
@@ -131,19 +136,28 @@
             </div>
             <div class="card-body ">
               <form>
-                <h6 class="heading-small text-muted mb-4">User Information</h6>
+                <div class="row">
+                  <div class="col-md-8">
+                    <h6 class="heading-small text-muted mb-4">User Information</h6>
+                  </div>
+                  <div class="col-md-4 text-right">
+                    <a href="#">
+                      <button class="btn btn-outline-warning btn-sm">Edit profile</button>
+                    </a> 
+                  </div>
+                </div>
                 <div class="pl-lg-4 ">
                   <div class="row ">
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label " for="input-number">Phone number</label>
-                        <input type="numero" id="input-number" class="form-control bg-default shadow" placeholder="phone number" disabled>
+                        <input type="numero" id="input-number" class="form-control bg-default shadow color-input border-input" placeholder="phone number" v-model="profilcuisinier.num" value="{{old('num')}}" disabled>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control bg-default shadow" placeholder="email" disabled>
+                        <input type="email" id="input-email" class="form-control bg-default shadow color-input border-input" placeholder="email" v-model="profilcuisinier.email" value="{{old('email')}}" disabled>
                       </div>
                     </div>
                   </div>
@@ -151,13 +165,13 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">First name</label>
-                        <input type="text" id="input-first-name" class="form-control bg-default shadow" placeholder="First name" disabled>
+                        <input type="text" id="input-first-name" class="form-control bg-default shadow color-input border-input" placeholder="First name" v-model="profilcuisinier.first_name" value="{{old('first_name')}}" disabled>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-last-name">Last name</label>
-                        <input type="text" id="input-last-name" class="form-control bg-default shadow" placeholder="Last name" disabled>
+                        <input type="text" id="input-last-name" class="form-control bg-default shadow color-input border-input" placeholder="Last name" v-model="profilcuisinier.last_name" value="{{old('last_name')}}" disabled>
                       </div>
                     </div>
                   </div>
@@ -165,13 +179,13 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-date">Date of birth</label>
-                        <input type="Date" id="input-date" class="form-control bg-default shadow" placeholder="Date of birth" disabled>
+                        <input type="Date" id="input-date" class="form-control bg-default shadow color-input border-input" placeholder="Date of birth" v-model="profilcuisinier.date_of_birth" value="{{old('date_of_birth')}}" disabled>
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-code-postal">Postal code</label>
-                        <input type="numero" id="input-code-postal" class="form-control bg-default shadow" placeholder="Postal code" disabled>
+                        <input type="numero" id="input-code-postal" class="form-control bg-default shadow color-input border-input" placeholder="Postal code" v-model="profilcuisinier.code_postal" value="{{old('code_postal')}}" disabled>
                       </div>
                     </div>
                   </div>
@@ -184,7 +198,7 @@
                     <div class="col-md-10">
                       <div class="form-group">
                         <label class="form-control-label" for="input-address">Address</label>
-                        <input id="input-address" class="form-control bg-default shadow" placeholder="Home Address"  type="text" disabled>
+                        <input id="input-address" class="form-control bg-default shadow color-input border-input" placeholder="Home Address"  type="text" v-model="profilcuisinier.adresse" value="{{old('adresse')}}" disabled>
                       </div>
                     </div>
                   </div>
@@ -195,7 +209,7 @@
                 <div class="pl-lg-4">
                   <div class="form-group">
                     <label class="form-control-label">About Me</label>
-                    <textarea rows="4" class="form-control bg-default shadow" placeholder="web site developer "></textarea>
+                    <textarea rows="4" class="form-control bg-default shadow color-input border-input" disabled>web site developer</textarea>
                   </div>
                 </div>
               </form>
@@ -205,3 +219,86 @@
       </div>
 
 @endsection
+
+@push('javascripts')
+
+<script>
+        window.Laravel = {!! json_encode([
+               'csrfToken' => csrf_token(),
+                'cuisinier'  => $cuisinier,     
+                'url'      => url('/')  
+          ]) !!};
+</script>
+<script>
+   var app = new Vue({
+
+    el: '#app',
+    data:{
+        profilcuisinier: [],
+        /*profile_ad: {
+          id: 0,
+          user_id: window.Laravel.idUser,
+          first_name: '',
+          last_name: '',
+          email: '',
+          num: '',
+          date_of_birth: '',
+          code_postal: '',
+          adresse: '',
+
+        },*/
+      },
+      methods: {
+        
+        profile_cuisinier: function(){
+          axios.get(window.Laravel.url+'/profileC')
+
+              .then(response => {
+                   console.log('success : ', response);
+                   this.profilcuisinier = window.Laravel.cuisinier;
+              })
+              .catch(error =>{
+                   console.log('errors :' , error);
+              })
+        },
+        /*editProfile: function(profile_ad){
+          this.show = false;
+          this.voir = true; 
+          this.profile_ad = profile_ad;
+        },
+        update_profile: function(p){
+          axios.put(window.Laravel.url+"/updateprofile/"+p.id,this.profile_ad)
+          $('#divid').load(' #divid');
+            .then(response => {
+              if(response.data.etat){
+               
+                 this.profile_ad = {
+                      id: 0,
+                      user_id: window.Laravel.idUser,  
+                      first_name: '',
+                      last_name: '',
+                      email: '',
+                      num: '',
+                      date_of_birth: '',
+                      code_postal: '',
+                      adresse: '',
+                  };
+
+              }
+              
+                 
+            })
+            .catch(error =>{
+                console.log('errors :' , error);
+            })
+
+      } */
+        
+    },
+    created:function(){
+      this.profile_cuisinier();
+    },
+  });
+</script>
+
+@endpush

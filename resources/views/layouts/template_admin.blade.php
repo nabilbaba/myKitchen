@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-<script src="{{ asset('js/app.js') }}"></script>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,13 +10,26 @@
   <link rel="icon" href="assetsAdmin/img/brand/N.png" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-  <!-- Icons -->
+
+  
+  <link rel="stylesheet" href="assetsAdmin/vendor/bootstrap/dist/css/bootstrap.min.css" type="text/css">
+
   <link rel="stylesheet" href="assetsAdmin/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="assetsAdmin/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assetsAdmin/css/argon.css?v=1.2.0" type="text/css">
+  <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/vue.js') }}"></script>
+  <script src="{{ asset('js/axios.min.js') }}"></script>
   
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous">
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+  </script>
+
 
   
   <?php
@@ -37,7 +49,7 @@
          else if($urlAcctuiel == 'profileA'){
              $stripeProfile='active';
          }
-         else if($urlAcctuiel == 'utilisateurs'){
+         else if($urlAcctuiel == 'cuisiniers'){
              $stripeUsers='active';
          }
          else if($urlAcctuiel == 'recettes'){
@@ -65,7 +77,7 @@
             </a>
           </h1>
         </a>
-        <hr  style="margin-top: 40px; width: 200px;">
+        <hr style="margin-top: 40px; width: 200px;">
       </div>
       <div class="navbar-inner">
         <!-- Collapse -->
@@ -97,7 +109,7 @@
               </a>
             </li>
             <li class="nav-item" style="margin-top: 30px;">
-              <a class="nav-link <?php echo $stripeUsers ?>" href="{{route('utilisateurs')}}">
+              <a class="nav-link <?php echo $stripeUsers ?>" href="{{route('cuisiniers')}}">
                 <i class="ni ni-bullet-list-67 text-default"></i>
                 <b><span class="nav-link-text">Users</span></b>
               </a>
@@ -124,11 +136,12 @@
   </nav>
   <!-- Main content -->
   <div class="main-content" id="panel" >
-    
+
 
     @yield('content')
-
-    <footer class="footer pt-0">
+    
+    <div class="container-fluid mt-3">
+      <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-lg-6">
             <div class="copyright text-center  text-lg-left  text-muted">
@@ -150,11 +163,13 @@
           </div>
         </div>
       </footer>
-    </div>
    </div>
-
+ </div>
+   
   <!-- Argon Scripts -->
   <!-- Core -->
+
+    @stack('scripts')
   <script src="assetsAdmin/vendor/jquery/dist/jquery.min.js"></script>
   <script src="assetsAdmin/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assetsAdmin/vendor/js-cookie/js.cookie.js"></script>

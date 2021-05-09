@@ -8,7 +8,7 @@
   <meta name="author" content="Creative Tim">
   
   <!-- Favicon -->
-  <link rel="icon" href="assetsCuisinier/img/brand/favicon.png" type="image/png">
+  <link rel="icon" href="assetsCuisinier/img/brand/N.png" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
@@ -127,6 +127,8 @@
   <script src="assetsCuisinier/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
   <script src="assetsCuisinier/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
+  <script src="assetsAdmin/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="assetsAdmin/vendor/chart.js/dist/Chart.extension.js"></script>
   <script src="assetsCuisinier/js/argon.js?v=1.2.0"></script>
 </body>
 

@@ -49,7 +49,7 @@
                     <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">Babaahmed Nabil</span>
+                    <span class="mb-0 text-sm  font-weight-bold">{{ $admin->first_name }} {{ $admin->last_name }}</span>
                   </div>
                 </div>
               </a>
@@ -96,15 +96,16 @@
     <div class="container-fluid mt--6">
       
       <!-- Dark table -->
-      <div class="row">
+      <div class="row" id="app">
         <div class="col">
           <div class="card bg-default shadow">
             <div class="card-header bg-transparent border-0">
               <h3 class="text-white mb-0">Deactivated accounts</h3>
-              <a href="{{route('utilisateurs')}}">
-                <button type="button" class="btn btn-outline-neutral  btn-sm float-right" style="margin-top: -25px;" >
+              <a href="{{route('cuisiniers')}}">
+                <!--button type="button" class="btn btn-outline-neutral  btn-sm float-right" style="margin-top: -25px;" >
                   <b>Back to users menu</b>
-                </button>
+                </button-->
+                <img src="assetsAdmin/icons/retour.png" alt="..." class="float-right" style="margin-top: -25px; cursor: pointer" data-toggle="tooltip" title="Back to user menu" data-placement="top" />
               </a>
             </div>
             <div class="table-responsive">
@@ -119,56 +120,31 @@
                   </tr>
                 </thead>
                 <tbody class="list">
-                  <tr>
+                  <tr v-for="cuisrecup in cuisiniersrecup">
                     <th scope="row">
                       <div class="media align-items-center">
                         <a href="#" class="avatar rounded-circle mr-3">
                           <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
                         </a>
                         <div class="media-body">
-                          <span class="name mb-0 text-sm">moncef</span>
+                          <span class="name mb-0 text-sm">@{{cuisrecup.first_name}} @{{cuisrecup.last_name}}</span>
                         </div>
                       </div>
                     </th>
                     <td >
-                      baba......@gmail.com
+                      @{{cuisrecup.email}}
                     </td>
                     <td>
-                      05********
+                      @{{cuisrecup.num}}
                     </td>
                     <td>
-                      10
+                      **
                     </td>
                     <td>
-                      <button type="button" class="btn btn-outline-success  btn-sm " >
+                      <!--button type="button" class="btn btn-outline-success  btn-sm " v-on:click="recupConfirmer(cuisrecup)">
                         <b>Activate</b>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <a href="#" class="avatar rounded-circle mr-3">
-                          <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
-                        </a>
-                        <div class="media-body">
-                          <span class="name mb-0 text-sm">nabil</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td >
-                      baba......@gmail.com
-                    </td>
-                    <td>
-                      05********
-                    </td>
-                    <td>
-                      10
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-outline-success  btn-sm ">
-                        <b>Activate</b>
-                      </button>
+                      </button-->
+                      <img src="assetsAdmin/icons/activer.png" alt="..." v-on:click="recupConfirmer(cuisrecup)" data-toggle="tooltip" title="Activate" data-placement="top" style="cursor: pointer;">
                     </td>
                   </tr>
                 </tbody>
@@ -177,7 +153,63 @@
           </div>
         </div>
       </div>
-  
+    </div>
 
 
 @endsection
+
+@push('scripts')
+
+
+
+<script>
+ 
+        window.Laravel = {!! json_encode([
+               'csrfToken' => csrf_token(),
+                'cuisinier_recup' => $cuisinier_recup,
+                'url'      => url('/')  
+          ]) !!};
+</script>
+<script>
+    var app = new Vue({
+
+    el: '#app',
+    data:{
+        
+        cuisiniersrecup:[],           
+      },
+    methods: {
+        recupCuisinier: function(){
+        axios.get(window.Laravel.url+'/recup-cuisinier')
+
+            .then(response => {
+                 this.cuisiniersrecup = window.Laravel.cuisinier_recup;
+            })
+            .catch(error =>{
+                 console.log('errors :' , error);
+            })
+      },
+      recupConfirmer:function(rec){
+            if(confirm("do you really want to activate this user ?"))
+            {
+              axios.get(window.Laravel.url+'/recup-confirmer/'+rec.id) 
+              .then(response =>{
+                if(response.data.etat){   
+                    var position = this.cuisiniersrecup.indexOf(rec);
+                    this.cuisiniersrecup.splice(position,1);   
+                }
+                         
+              })
+              .catch(error => {
+                  console.log('errors : ',error)
+              })
+            }
+        },
+    },
+    created:function(){
+      this.recupCuisinier();
+    }
+  });
+</script>
+
+@endpush

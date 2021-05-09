@@ -143,7 +143,7 @@
             <div class="card-body ">
               
              <!-- formulaire d'affichage -->
-              <form v-if="show">
+              <form v-if="voir">
                 <div class="row">
                   <div class="col-md-8">    
                      <h6 class="heading-small text-muted mb-4">
@@ -151,7 +151,10 @@
                      </h6>
                   </div>
                   <div class="col-md-4 text-right">
-                     <button class="btn btn-outline-warning btn-sm"  v-on:click="editProfile(profile_ad)">Edit profile</button>
+                    
+                      <!--button class="btn btn-outline-warning btn-sm">Edit profile</button-->
+                      <img src="assetsAdmin/icons/modifier.png"  v-on:click="edit()" alt="..."   style="cursor: pointer"  />
+                     
                   </div>
                 </div>
                 <div class="pl-lg-4 ">
@@ -217,35 +220,38 @@
                 <div class="pl-lg-4">
                   <div class="form-group">
                     <label class="form-control-label" for="textarea-about">About Me</label>
-                    <textarea id="textarea-about" rows="4" class="form-control bg-default shadow color-input border-input" >web site devloper</textarea>
+                    <textarea id="textarea-about" rows="4" class="form-control bg-default shadow color-input border-input" disabled>web site devloper</textarea>
                   </div>
                 </div>
               </form>
-          
+          <!-- fin form ajout-->
+
+
           <!-- formulaire de la modification -->
-              <form v-if="voir">
+               <form v-else>
                 <div class="row">
                   <div class="col-md-8">    
                      <h6 class="heading-small text-muted mb-4">
                        Admin Information
                      </h6>
                   </div>
-                  <div class="col-md-4 text-right" >
-                     <button class="btn btn-outline-success btn-sm "   v-on:click="update_profile(profiladmin)">save</button>
+                  <div class="col-md-4 text-right">
+                      <button class="btn btn-warning btn-sm" v-on:click="annuler()">Annuler</button>
+                      <button class="btn btn-success btn-sm" >Save</button>
                   </div>
-                </div> 
+                </div>
                 <div class="pl-lg-4 ">
                   <div class="row ">
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label " for="input-number">Phone number</label>
-                        <input type="numero" id="input-number" class="form-control bg-default shadow " placeholder="phone number" v-model="profiladmin.num" value="{{old('num')}}" >
+                        <input type="numero" id="input-number" class="form-control bg-default shadow color-input " placeholder="phone number" v-model="profiladmin.num" value="{{old('num')}}" >
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control bg-default shadow " placeholder="email" v-model="profiladmin.email" value="{{old('email')}}" >
+                        <input type="email" id="input-email" class="form-control bg-default shadow color-input " placeholder="email" v-model="profiladmin.email" value="{{old('email')}}" >
                       </div>
                     </div>
                   </div>
@@ -253,13 +259,13 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">First name</label>
-                        <input type="text" id="input-first-name" class="form-control bg-default shadow " placeholder="First name" v-model="profiladmin.first_name" value="{{old('first_name')}}" >
+                        <input type="text" id="input-first-name" class="form-control bg-default shadow color-input " placeholder="First name" v-model="profiladmin.first_name" value="{{old('first_name')}}" >
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-last-name">Last name</label>
-                        <input type="text" id="input-last-name" class="form-control bg-default shadow " placeholder="Last name" v-model="profiladmin.last_name" value="{{old('last_name')}}" >
+                        <input type="text" id="input-last-name" class="form-control bg-default shadow color-input " placeholder="Last name" v-model="profiladmin.last_name" value="{{old('last_name')}}" >
                       </div>
                     </div>
                   </div>
@@ -267,13 +273,13 @@
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-date">Date of birth</label>
-                        <input type="Date" id="input-date" class="form-control bg-default shadow " placeholder="Date of birth" v-model="profiladmin.date_of_birth" value="{{old('date_of_birth')}}" >
+                        <input type="Date" id="input-date" class="form-control bg-default shadow color-input " placeholder="Date of birth" v-model="profiladmin.date_of_birth" value="{{old('date_of_birth')}}" >
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-code-postal">Postal code</label>
-                        <input type="numero" id="input-code_postal" class="form-control bg-default shadow  " placeholder="Postal code" v-model="profiladmin.code_postal" value="{{old('code_postal')}}" >
+                        <input type="numero" id="input-code_postal" class="form-control bg-default shadow color-input  " placeholder="Postal code" v-model="profiladmin.code_postal" value="{{old('code_postal')}}" >
                       </div>
                     </div>
                   </div>
@@ -286,7 +292,7 @@
                     <div class="col-md-10">
                       <div class="form-group">
                         <label class="form-control-label" for="input-address">Address</label>
-                        <input id="input-address" class="form-control bg-default shadow " placeholder="Home Address"  type="text" v-model="profiladmin.adresse" value="{{old('adresse')}}">
+                        <input id="input-address" class="form-control bg-default shadow color-input " placeholder="Home Address"  type="text" v-model="profiladmin.adresse" value="{{old('adresse')}}"  >
                       </div>
                     </div>
                   </div>
@@ -296,11 +302,12 @@
                 <h6 class="heading-small text-muted mb-4">About me</h6>
                 <div class="pl-lg-4">
                   <div class="form-group">
-                    <label class="form-control-label">About Me</label>
-                    <textarea rows="4" class="form-control bg-default shadow " placeholder="web site developer "></textarea>
+                    <label class="form-control-label" for="textarea-about">About Me</label>
+                    <textarea id="textarea-about" rows="4" class="form-control bg-default shadow color-input " >web site devloper</textarea>
                   </div>
                 </div>
               </form>
+           <!--fin form edit-->   
             </div>
           </div>
         </div>
@@ -314,8 +321,8 @@
 <script>
         window.Laravel = {!! json_encode([
                'csrfToken' => csrf_token(),
-                'admin'  => $admin,
-                
+                'admin'  => $admin, 
+               // 'idUser' => $idUser,   
                 'url'      => url('/')  
           ]) !!};
 </script>
@@ -325,7 +332,7 @@
     el: '#app',
     data:{
         profiladmin: [],
-        profile_ad: {
+        /*profile_ad: {
           id: 0,
           user_id: window.Laravel.idUser,
           first_name: '',
@@ -336,9 +343,8 @@
           code_postal: '',
           adresse: '',
 
-        },
-        voir: false,
-        show: true,
+        },*/
+        voir: true,
       },
       methods: {
         
@@ -353,14 +359,14 @@
                    console.log('errors :' , error);
               })
         },
-        editProfile: function(profile_ad){
-          this.show = false;
-          this.voir = true; 
-          this.profile_ad = profile_ad;
+        edit: function(){
+            this.voir = false;
         },
-        update_profile: function(p){
+        annuler: function(){
+            this.voir = true;
+        },
+        /*update_profile: function(p){
           axios.put(window.Laravel.url+"/updateprofile/"+p.id,this.profile_ad)
-          
             .then(response => {
               if(response.data.etat){
                
@@ -384,7 +390,7 @@
                 console.log('errors :' , error);
             })
 
-      } 
+      } */
         
     },
     created:function(){
