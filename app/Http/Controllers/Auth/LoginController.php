@@ -32,7 +32,7 @@ class LoginController extends Controller
       
       
         if(Auth::user()->type_compte == "c" ){
-                return RouteServiceProvider::HOME;
+                return RouteServiceProvider::CUISINIER;
         }
         elseif (Auth::user()->type_compte == "a" ) {
             return RouteServiceProvider::ADMIN;

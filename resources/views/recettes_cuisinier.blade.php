@@ -99,9 +99,10 @@
           <div class="card bg-default shadow">
             <div class="card-header bg-transparent border-0">
               <h3 class="text-white mb-0">The Recipes</h3>
-             <button type="button" class="btn btn-outline-success  btn-sm float-right" style="margin-top: -25px;">
+             <!--button type="button" class="btn btn-outline-success  btn-sm float-right" style="margin-top: -25px;">
                 <b>Add a recipe</b>
-              </button>
+              </button-->
+              <img src="assetsCuisinier/icons/ajouter.png " alt="..."  class="float-right" data-bs-toggle="modal" data-bs-target="#categorieModal" style="margin-top: -25px; cursor: pointer;" data-toggle="tooltip" title="Add recipe" data-placement="top"  / >
             </div>
             <div class="table-responsive">
               <table class="table align-items-center table-dark table-flush">
@@ -115,48 +116,28 @@
                 <tbody>
                   <tr>
                     <td>
-                      Recipe 1
+                      <b>Recipe 1</b>
                     </td>
                     <td class="text-right">
-                      <div class="dropdown" style="margin-left: 350px;">
+                      <!--div class="dropdown" style="margin-left: 350px;">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" >
                           <a class="dropdown-item" href="#" >See more</a>
                          </div>
-                      </div>
+                      </div-->
+                      <img src="assetsCuisinier/icons/voir_plus.png" alt="..." class="ml-8" data-bs-toggle="modal" data-bs-target="#userModal"   data-toggle="tooltip" title="See more" data-placement="top" style="cursor: pointer;  margin-top: 8px;" />
                     </td>
                     <td>
-                      <button type="button" class="btn btn-outline-warning  btn-sm " style="margin-left: 100px;">
+                      <!--button type="button" class="btn btn-outline-warning  btn-sm " style="margin-left: 100px;">
                        <b>update</b>
                       </button>
                       <button type="button" class="btn btn-outline-danger  btn-sm " >
                        <b>delete</b>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      Recipe 2
-                    </td>
-                    <td class="text-right">
-                      <div class="dropdown" style="margin-left: 450px;">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" >
-                          <a class="dropdown-item" href="#" >See more</a>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-outline-warning  btn-sm" style="margin-left: 100px;">
-                       <b>update</b>
-                      </button>
-                      <button type="button" class="btn btn-outline-danger  btn-sm" >
-                       <b>delete</b>
-                      </button>
+                      </button-->
+                      <img src="assetsCuisinier/icons/delete.png " alt="..." class=" float-right"   style="cursor: pointer;" data-toggle="tooltip" title="Delete recipe" data-placement="top" />
+                        <img src="assetsCuisinier/icons/modifier.png " alt="..." class="mr-4 float-right"  style="cursor: pointer;" data-toggle="tooltip" title="Edit recipe" data-placement="top" />
                     </td>
                   </tr>
                 </tbody>

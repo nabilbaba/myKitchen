@@ -22,9 +22,21 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 
-Route::get('/profileA','AdminController@profile_admin')->name('profileA');
 
-Route::put('/updateprofile/{id}','AdminController@updateProfile')->name('updateprofile');
+//Route::put('/updateprofile/{id}','AdminController@updateProfile')->name('updateprofile');
+Route::get('/profileA','AdminController@profile_admin')->name('profileA');
+Route::get('/catégories','AdminController@getCategorie')->name('catégories');
+Route::get('/cuisiniers','AdminController@getCooker')->name('cuisiniers');
+Route::post('/cuisiniers','AdminController@getDetailsCuis')->name('cuisinier.getbyid');
+Route::post('/add-categorie','AdminController@addCategorie')->name('categorie.add');
+Route::get('/catégories/{id}','AdminController@getCategorieById')->name('categorie.getbyid');
+Route::put('/update-categorie/','AdminController@updateCategorie')->name('categorie.update');
+Route::delete('/delete-categorie/{id}','AdminController@deleteCategorie')->name('categorie.delete');
+Route::get('/desactiver-cuisinier/{id}','AdminController@desactiverCuisinier')->name('cuisinier.desactive');
+Route::get('/recup-cuisinier/','AdminController@recupererCuisinier')->name('cuisinier.recup');
+Route::get('/recup-confirmer/{id}','AdminController@recupeConfirmer')->name('cuisinier.recupConfir');
+Route::get('getCat','AdminController@getCategoriepagination')->name('catégories.getCat');
+
 
 Route::get('/statistiques', function () {
     return view('statistiques_admin');
@@ -34,28 +46,20 @@ Route::get('/publications', function () {
     return view('publications_admin');
 })->name('publications');
 
-Route::get('/utilisateurs', function () {
-    return view('utilisateurs_admin');
-})->name('utilisateurs');
 
 Route::get('/icons', function () {
     return view('icons_admin');    
 })->name('icons');
 
+
+
 Route::get('/recettes', function () {
     return view('recettes_admin');
 })->name('recettes');
 
-Route::get('/catégories', function () {
-    return view('catégorie_admin');
-})->name('catégories');
-
-Route::get('/activerLesComptes', function () {
-    return view('comptes_desactivés');
-})->name('activerLesComptes');
 
 //=======================================//
-Route::get('/profileC','HomeController@index3')->name('profileC');
+Route::get('/profileC','CuisinierController@profile_cuisinier')->name('profileC');
 
 Route::get('/recettesC', function () {
     return view('recettes_cuisinier');

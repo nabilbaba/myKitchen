@@ -53,7 +53,7 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     public function redirectTo(){
-        return RouteServiceProvider::HOME;
+        return RouteServiceProvider::CUISINIER;
     } 
 
     protected function validator(array $data)

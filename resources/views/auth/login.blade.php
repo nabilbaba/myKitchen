@@ -2,7 +2,7 @@
 
 @section('content')
 <head><title>login</title></head>
-    <div class="limiter">
+    <div class="limiter" id="divid">
         <div class="container-login100">
             <div class="wrap-login100">
               <form class="login100-form " method="POST" action="{{ route('login') }}">
