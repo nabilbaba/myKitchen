@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  
+
   <!-- Favicon -->
   <link rel="icon" href="assetsCuisinier/img/brand/N.png" type="image/png">
   <!-- Fonts -->
@@ -16,24 +16,24 @@
   <link rel="stylesheet" href="assetsCuisinier/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assetsCuisinier/css/argon.css?v=1.2.0" type="text/css">
-  
+
   <?php
 
          $stripeProfile=$stripeIcons=$stripeRecipes='';
-                
+
          $urlAcctuiel = Route::getCurrentRoute()->uri();
-         
+
          if($urlAcctuiel == 'iconsC'){
              $stripeIcons='active';
          }
          else if($urlAcctuiel == 'profileC'){
              $stripeProfile='active';
          }
-         
+
          else if($urlAcctuiel == 'recettesC'){
              $stripeRecipes='active';
          }
-         
+
 
   ?>
 </head>
@@ -87,7 +87,7 @@
   </nav>
   <!-- Main content -->
    <div class="main-content" id="panel" >
-    
+
     @yield('content')
 
 
@@ -95,7 +95,7 @@
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-lg-6">
             <div class="copyright text-center  text-lg-left  text-muted">
-              &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+              &copy; 2021 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
             </div>
           </div>
           <div class="col-lg-6">

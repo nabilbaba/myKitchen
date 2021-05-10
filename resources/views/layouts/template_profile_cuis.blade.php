@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  
+
   <!-- Favicon -->
   <link rel="icon" href="assetsAdmin/img/brand/N.png" type="image/png">
   <!-- Fonts -->
@@ -30,20 +30,20 @@
   <?php
 
          $stripeProfile=$stripeIcons=$stripeRecipes='';
-                
+
          $urlAcctuiel = Route::getCurrentRoute()->uri();
-         
+
          if($urlAcctuiel == 'iconsC'){
              $stripeIcons='active';
          }
          else if($urlAcctuiel == 'profileC'){
              $stripeProfile='active';
          }
-         
+
          else if($urlAcctuiel == 'recettesC'){
              $stripeRecipes='active';
          }
-         
+
 
   ?>
 
@@ -97,17 +97,17 @@
     </div>
   </nav>
   <!-- Main content -->
-  
+
  <div class="main-content" id="panel" >
-    
+
     @yield('content')
 
-    
+
     <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-lg-6">
             <div class="copyright text-center  text-lg-left  text-muted">
-              &copy; 2020 <a href="{{route('myKitchen')}}" class="font-weight-bold ml-1" target="_blank">myKitchen</a>
+              &copy; 2021 <a href="{{route('myKitchen')}}" class="font-weight-bold ml-1" target="_blank">myKitchen</a>
             </div>
           </div>
           <div class="col-lg-6">
@@ -129,7 +129,7 @@
     
     @stack('javascripts')
   </div>
-  
+
 
   <!-- Argon Scripts -->
   <!-- Core -->

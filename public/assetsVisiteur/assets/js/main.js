@@ -30,7 +30,7 @@
     }
 
     /**
-     * Easy on scroll event listener 
+     * Easy on scroll event listener
      */
     const onscroll = (el, listener) => {
         el.addEventListener('scroll', listener)
@@ -214,7 +214,7 @@
     //             for (a = 1; a < 8; a++) {
     //                 if (idsearch[a] == idsearch[j]) {
     //                     continue;
-    //                 } 
+    //                 }
     //                     document.getElementById('div' + a).remove('filter-active');
 
 
@@ -245,7 +245,7 @@
 
 
     //     //     //     if (filter == idsearch) { console.log("-"); }
-    //     // 
+    //     //
 
 
     //     //console.log(document.getElementById('idsearch').innerHTML.toUpperCase());
@@ -256,7 +256,7 @@
 
 
     /**
-     * Initiate RECIPES lightbox 
+     * Initiate RECIPES lightbox
      */
     const RECIPESLightbox = GLightbox({
         selector: '.RECIPES-lightbox'
@@ -298,3 +298,25 @@
     });
 
 })()
+
+function star(a) {
+
+    for (var i = 1; i < a; i++) {
+        document.getElementsByClassName("fa fa-star")[i].className = "fa fa-star gold";
+    }
+    for (var i = a; i < 5; i++) {
+        document.getElementsByClassName("fa fa-star")[i].className = "fa fa-star";
+    }
+    console.log(a);
+
+}
+
+function comment() {
+    var x = document.getElementById("myTextarea").value;
+    console.log(x);
+    document.getElementsById("testerfuck").innerHTML = x;
+
+
+    //document.getElementById("comment").innerHTML = "<h4> THANK YOU! </h4>";
+
+}

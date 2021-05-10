@@ -20,8 +20,45 @@
 
                             </div>
                         </div>
+<br><br>
+                        <div class="p-3 mt-2 rating d-flex align-items-center justify-content-center w-auto">
+                        <h4>EVALUATE THIS WORK</h4> <br>
+	                       <div class="stars">
+		                      <i class="fa fa-star gold" onClick="star(1)"></i>
+		                      <i class="fa fa-star"onClick="star(2)"></i>
+		                      <i class="fa fa-star"onClick="star(3)"></i>
+		                      <i class="fa fa-star"onClick="star(4)"></i>
+		                      <i class="fa fa-star" onClick="star(5)"></i>
+                        </div>
 
-                    </div>
+
+
+<br>
+
+
+                       <textarea id="myTextarea" class="form-control"  rows="2" placeholder="add your comment..." required></textarea>
+                       </div>
+                       <br>
+                       <div class="text-center"><button type="submit" onclick="comment()">SEND</button></div>
+
+                       <div class="bg bg-dark mt-3 " style="height: 155px;">
+                       <br>
+                       <div class="second py-2 px-2 ml-2">
+                       <span class="text2 center">
+                       oh this is greate , i like this</span>
+                       </div>
+                       <br>
+                       <div class="second py-2 px-2 ml-2">
+                       <span class="text2"></span>
+                       </div>
+                       </div>
+
+                <!-- <div><span class="text3"></span><span class="thumbup"><i class="fa fa-thumbs-o-up"></i></span><span class="text4">3</span></div> -->
+
+
+                        </div>
+
+
 
                     <div class="col-lg-4">
                         <div class="portfolio-info">
@@ -61,5 +98,5 @@
 
             </div>
         </section>
-     
+
 @endsection
