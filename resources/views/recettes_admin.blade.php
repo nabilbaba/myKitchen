@@ -102,7 +102,8 @@
             <div class="card-header bg-transparent border-0">
               <h3 class="text-white mb-0">Recipes details</h3>
                <div class="col-lg-12  text-right" style="margin-top: -25px;">
-                 <a href="#" class="btn btn-sm btn-outline-neutral">Sort by date</a>
+                 <!--a href="#" class="btn btn-sm btn-outline-neutral">Sort by date</a-->
+                 <img src="assetsAdmin/icons/trier.png" alt="..." data-toggle="tooltip" title="Sort by date" data-placement="top" style="cursor: pointer;" />
                </div>
              </div>
             <div class="table-responsive">
@@ -139,19 +140,21 @@
                       moncef
                     </td>
                     <td class="text-right">
-                      <div class="dropdown" style="margin-left: 20px;">
+                      <!--div class="dropdown" style="margin-left: 20px;">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu dropdown-menu-arrow" >
                           <a class="dropdown-item" href="#" >See more</a>
                         </div>
-                      </div>
+                      </div-->
+                      <img src="assetsAdmin/icons/voir_plus.png" alt="..." data-toggle="tooltip" title="See more" data-placement="top" style="cursor: pointer;" />
                     </td>
                     <td>
-                      <button type="button" class="btn btn-outline-danger  btn-sm " >
+                      <!--button type="button" class="btn btn-outline-danger  btn-sm " >
                         <b>Delete</b>
-                      </button>
+                      </button-->
+                      <img src="assetsAdmin/icons/delete.png" alt="..." data-toggle="tooltip" title="Delete recipe" data-placement="top" style="cursor: pointer;">
                     </td>
                   </tr>
                 </tbody>
@@ -160,6 +163,7 @@
           </div>
         </div>
       </div>
+    </div>
    
     
 @endsection

@@ -98,12 +98,12 @@
         <div class="col">
           <div class="card bg-default shadow">
             <!-- Card header -->
-            <div class="card-header border-0 bg-default shadow">
+            <div class="card-header border-0 bg-default shadow ">
               <h3 class="mb-0" style="color: white;">Recipes notifications</h3>
             </div>
             <!-- Light table -->
             <div class="table-responsive">
-              <table class="table align-items-center table-dark table-flush">
+              <table class="table align-items-center table-dark table-flush ">
                 <thead class="thead-dark">
                   <tr>
                     <th scope="col" class="sort" >The Recipe</th>
@@ -112,7 +112,7 @@
                     <th></th>
                   </tr>
                 </thead>
-                <tbody class="list">
+                <tbody class="list" >
                   <tr>
                     <th scope="row">
                       <div class="media align-items-center">
@@ -125,52 +125,25 @@
                       nabil
                     </td>
                     <td class="text-right">
-                      <div class="dropdown" style="margin-left: 100px;">
+                      <!--div class="dropdown" style="margin-left: 100px;">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="fas fa-ellipsis-v" ></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" >
                           <a class="dropdown-item" href="#" >See more</a> 
                         </div>
-                      </div>
+                      </div-->
+                      <img src="assetsAdmin/icons/voir_plus.png" alt="..." class="ml-8" data-toggle="tooltip" data-placement="top" title="See more" style="cursor: pointer;"/>
                     </td>
                     <td>
-                      <button type="button" class="btn btn-outline-success  btn-sm " style="margin-left: 100px;">
+                      <!--button type="button" class="btn btn-outline-success  btn-sm " style="margin-left: 100px;">
                        <b>validate</b>
-                      </button>
-                      <button type="button" class="btn btn-outline-danger  btn-sm " style="margin-right: 20px;">
+                      </button-->
+                      <img src="assetsAdmin/icons/accepter.png" alt="..." class="ml-9" style=" cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Validate" />
+                      <!--button type="button" class="btn btn-outline-danger  btn-sm " style="margin-right: 20px;">
                        <b>delete</b>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <div class="media-body">
-                          <span class="name mb-0 text-sm">recipe 2******************************</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td >
-                     moncef
-                    </td>
-                    <td class="text-right">
-                      <div class="dropdown" style="margin-left: 100px;">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" >
-                          <a class="dropdown-item" href="#" >See more</a>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-outline-success  btn-sm " style="margin-left: 100px;">
-                        <b>validate</b>
-                      </button>
-                      <button type="button" class="btn btn-outline-danger  btn-sm " style="margin-right: 20px;">
-                        <b>delete</b>
-                      </button>
+                      </button-->
+                      <img src="assetsAdmin/icons/delete.png" alt="..." class="ml-4" style=" cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Refuse" />
                     </td>
                   </tr>
                 </tbody>
@@ -179,7 +152,7 @@
           </div>
         </div>
       </div>
-  
+  </div>
 
 
 @endsection
