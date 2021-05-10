@@ -16,6 +16,13 @@
   <link rel="stylesheet" href="assetsAdmin/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Page plugins -->
   <!-- Argon CSS -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous">
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+  </script>
+
   <link rel="stylesheet" href="assetsAdmin/css/argon.css?v=1.2.0" type="text/css">
   <script src="{{ asset('js/vue.js') }}"></script>
   <script src="{{ asset('js/axios.min.js') }}"></script>
@@ -37,7 +44,7 @@
          else if($urlAcctuiel == 'profileA'){
              $stripeProfile='active';
          }
-         else if($urlAcctuiel == 'utilisateurs'){
+         else if($urlAcctuiel == 'cuisiniers'){
              $stripeUsers='active';
          }
          else if($urlAcctuiel == 'recettes'){
@@ -97,7 +104,7 @@
               </a>
             </li>
             <li class="nav-item" style="margin-top: 30px;">
-              <a class="nav-link <?php echo $stripeUsers ?>" href="{{route('utilisateurs')}}">
+              <a class="nav-link <?php echo $stripeUsers ?>" href="{{route('cuisiniers')}}">
                 <i class="ni ni-bullet-list-67 text-default"></i>
                 <b><span class="nav-link-text">Users</span></b>
               </a>

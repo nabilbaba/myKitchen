@@ -8129,7 +8129,8 @@ a.close.disabled
 {
     .modal-xl
     {
-        max-width: 1140px;
+        max-width: 1070px;
+        margin-right: 20px;
     }
 }
 
@@ -29850,4 +29851,7 @@ input.datetimepicker[data-color='yellow'] + .bootstrap-datetimepicker-widget.dro
 }
 .border-input{
     border:none ;
+}
+.table-det{
+  border:none;   
 }

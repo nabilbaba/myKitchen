@@ -5,6 +5,7 @@
 <head><title>Users</title></head>
    
     <!-- Topnav -->
+    
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-moncef border-bottom">
       <div class="container-fluid ">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -49,7 +50,7 @@
                     <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">Babaahmed Nabil</span>
+                    <span class="mb-0 text-sm  font-weight-bold">{{$admin->first_name}} {{$admin->last_name}}</span>
                   </div>
                 </div>
               </a>
@@ -96,18 +97,21 @@
     <div class="container-fluid mt--6">
       
       <!-- Dark table -->
-      <div class="row">
+      <div class="row" id="app">
         <div class="col">
           <div class="card bg-default shadow">
             <div class="card-header bg-transparent border-0">
-              <h3 class="text-white mb-0">Cooks details</h3>
-              <a href="{{route('activerLesComptes')}}">
+              <h3 class="text-white mb-0">Cook's details</h3>
+              <!--a href="{{route('cuisinier.recup')}}">
                 <button type="button" class="btn btn-outline-neutral  btn-sm float-right" style="margin-top: -25px;" >
                 <b>activate accounts</b>
                 </button>
+              </a-->
+              <a href="{{route('cuisinier.recup')}}">
+               <img src="assetsAdmin/icons/activer_compte.png" alt="..." class="float-right" style="margin-top: -25px; cursor: pointer;" data-toggle="tooltip" title="Activate accounts" data-placement="top"/>
               </a>
             </div>
-            <div class="table-responsive">
+            <div class="table-responsive" >
               <table class="table align-items-center table-dark table-flush">
                 <thead class="thead-dark">
                   <tr>
@@ -120,86 +124,274 @@
                   </tr>
                 </thead>
                 <tbody class="list">
-                  <tr>
+                  <tr v-for="user in users">                   
                     <th scope="row">
                       <div class="media align-items-center">
                         <a href="#" class="avatar rounded-circle mr-3">
                           <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
                         </a>
                         <div class="media-body">
-                          <span class="name mb-0 text-sm">moncef</span>
+                          <span class="name mb-0 text-sm">
+                            @{{user.first_name}} @{{user.last_name}}
+                          </span>
                         </div>
                       </div>
                     </th>
                     <td >
-                      baba......@gmail.com
+                      @{{user.email}}
                     </td>
                     <td>
-                      05********
+                      @{{user.num}}
                     </td>
                     <td>
-                      10
+                      **   
                     </td>
                     <td class="text-right">
-                      <div class="dropdown" style="margin-left: 20px;">
+                      <!--div class="dropdown" style="margin-left: 20px; margin-top: 8px;">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" >
-                          <a class="dropdown-item" href="#" >See more</a>
-                          <a class="dropdown-item" href="#">Delete</a>
+                          <a  class="dropdown-item " href="#" data-bs-toggle="modal" data-bs-target="#userModal" v-on:click="AfficherInfo(user.id)">See more
+                          </a> 
                         </div>
-                      </div>
+                      </div-->
+                      <img src="assetsAdmin/icons/voir_plus.png" alt="..." data-bs-toggle="modal" data-bs-target="#userModal" v-on:click="AfficherInfo(user.id)"  data-toggle="tooltip" title="See more" data-placement="top" style="cursor: pointer; margin-left: 20px; margin-top: 8px;" />
                     </td>
                     <td>
-                      <button type="button" class="btn btn-outline-danger  btn-sm " >
+                      <!--button type="button" class="btn btn-outline-danger  btn-sm " v-on:click="desactiverCuisinier(user)">
                         <b>Deactivate</b>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      <div class="media align-items-center">
-                        <a href="#" class="avatar rounded-circle mr-3">
-                          <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
-                        </a>
-                        <div class="media-body">
-                          <span class="name mb-0 text-sm">nabil</span>
-                        </div>
-                      </div>
-                    </th>
-                    <td >
-                      baba......@gmail.com
-                    </td>
-                    <td>
-                      05********
-                    </td>
-                    <td>
-                      10
-                    </td>
-                    <td class="text-right">
-                      <div class="dropdown" style="margin-left: 20px;">
-                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fas fa-ellipsis-v"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" >
-                          <a class="dropdown-item" href="#" >See more</a>
-                          <a class="dropdown-item" href="#">Delete</a>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <button type="button" class="btn btn-outline-danger  btn-sm ">
-                        <b>Deactivate</b>
-                      </button>
+                      </button-->
+                      <img src="assetsAdmin/icons/desactiver.png" alt="..." v-on:click="desactiverCuisinier(user)" data-toggle="tooltip" title="Deactivate this compte" data-placement="top" style="cursor: pointer;" />
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
+         {{ $cuisinier->links() }}
         </div>
       </div>
-  
-
+    <div id="app2">
+      <div class="modal fade" id="userModal" tabindex="-1"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" >
+          <div class="modal-content" v-for="cuis in detailsCuisinier">
+            <div class="modal-header">
+              <h4 class="modal-title"  >Cook's details</h4>
+              <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" > 
+              <div class="card card-profile bg-default shadow center card w-50">
+                <div class="row justify-content-center">
+                  <div class="col-lg-3 order-lg-2">
+                    <div class="card-profile-image">
+                      <a href="#">
+                        <img src="assetsAdmin/img/theme/bootstrap.jpg" class="rounded-circle">
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body pt-0 text-white" >
+                  <div class="text-center " style="margin-top: 100px;">
+                    <table class="table table-dark table-flush bg-default ">
+                      <tr>
+                        <td>
+                          <i class="ni ni-circle-08 text-white " ></i>
+                        </td>
+                        <td >
+                          <span class="h3 mt-4 text-white">
+                              @{{cuis.first_name}} @{{cuis.last_name}},
+                              
+                          </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="h5 mt-4 text-white ">
+                          <i class="ni ni-pin-3 text-white ni location_pin "></i>
+                        </td>
+                        <td class="h5 mt-4 text-white ">
+                          @{{cuis.adresse}}, Algerie
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="h5 mt-4 text-white ">
+                          <i class="ni ni-email-83 text-white ni email "></i>
+                        </td>
+                        <td class="h5 mt-4 text-white ">
+                          @{{cuis.email}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="h5 mt-4 text-white ">
+                          <i class="ni ni-mobile-button text-white ni numero "></i>
+                        </td>
+                        <td class="h5 mt-4 text-white ">
+                          @{{cuis.num}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="h5 mt-4 text-white ">
+                          <i class="ni ni-send text-white ni code-postal"></i>
+                        </td>
+                        <td class="h5 mt-4 text-white ">
+                          @{{cuis.code_postal}}
+                        </td>
+                      </tr>
+                      <tr> 
+                        <td class="h5 mt-4 text-white ">
+                          <i class="ni ni-badge text-white ni buisness "></i>
+                        </td>
+                        <td class="h5 mt-4 text-white ">
+                          @{{cuis.created_at}}
+                        </td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!--div class="table-responsive">
+                <table class="table align-items-center  table-flush">
+                  <thead class="">
+                    <tr>
+                       <th scope="col" class="sort" style="text-align: center;">All recipes of @{{cuis.first_name}} @{{cuis.last_name}}</th>
+                    </tr>
+                  </thead>
+                </table>  
+                <table class="table align-items-center  table-flush">
+                  <tbody class="list">
+                    <tr>
+                      <th scope="row">
+                        {{ $no++ }}
+                      </th>
+                      <th scope="row">
+                        <div class="media align-items-center">
+                          <a href="#" class="avatar rounded-circle mr-3">
+                            <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
+                          </a>
+                          <div class="media-body">
+                            <span class="name mb-0 text-sm">Recipe 1</span>
+                          </div>
+                        </div>
+                      </th>
+                      <td>
+                        created at 01/01/2021   
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row">
+                        {{ $no++ }}
+                      </th>
+                      <th scope="row">
+                        <div class="media align-items-center">
+                          <a href="#" class="avatar rounded-circle mr-3">
+                            <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
+                          </a>
+                          <div class="media-body">
+                            <span class="name mb-0 text-sm">Recipe 2</span>
+                          </div>
+                        </div>
+                      </th>
+                      <td>
+                        created at 01/01/2021   
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+   
+      
 @endsection
+
+
+@push('scripts')
+      <script>
+        window.Laravel = {!! json_encode([
+               "csrfToken"  => csrf_token(),
+               "cuisinier"   => $cuisinier,
+               "url"      => url("/")  
+          ]) !!};
+      </script>
+
+      <script>
+         var app2 = new Vue({
+
+          el: '#app2',
+          data:{
+              detailsCuisinier: [],
+              detaillsC: {
+                idC: 0,
+              },
+            },
+            methods: {
+              
+              details_cuisinier: function(){
+                axios.post(window.Laravel.url+'/cuisiniers',this.detaillsC)
+
+                    .then(response => {
+                         console.log('success : ', response);
+                         this.detailsCuisinier = response.data;
+                    })
+                    .catch(error =>{
+                         console.log('errors :' , error);
+                    })
+              },
+              
+          },
+        });
+
+         var app = new Vue({
+
+            el: '#app',
+            data:{
+                
+                users: [],           
+              },
+            methods: {
+              get_cuisinier: function(){
+                axios.get(window.Laravel.url+'/cuisiniers')
+
+                    .then(response => {
+                         this.users = window.Laravel.cuisinier.data;
+                    })
+                    .catch(error =>{
+                         console.log('errors :' , error);
+                    })
+              },
+              AfficherInfo: function($id){
+                app2.detaillsC.idC = $id;
+                app2.details_cuisinier();
+              },
+              desactiverCuisinier:function(cuisinier){
+                 if(confirm("do you really want to deactivate this user ?"))
+                   {
+                    axios.get(window.Laravel.url+'/desactiver-cuisinier/'+cuisinier.id) 
+                     .then(response =>{
+                         if(response.data.etat){  
+                             var position = this.users.indexOf(cuisinier);
+                             this.users.splice(position,1);
+                         }
+                         
+                      })
+                     .catch(error => {
+                        console.log(error)
+                     })
+                   }
+               },
+            },
+            created:function(){
+              this.get_cuisinier();
+            }
+          });
+
+      </script>
+
+@endpush
