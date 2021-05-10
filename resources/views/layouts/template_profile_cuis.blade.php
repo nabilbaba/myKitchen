@@ -24,9 +24,9 @@
   </script>
 
   <link rel="stylesheet" href="assetsAdmin/css/argon.css?v=1.2.0" type="text/css">
-
   <script src="{{ asset('js/vue.js') }}"></script>
   <script src="{{ asset('js/axios.min.js') }}"></script>
+
 
   <?php
 
