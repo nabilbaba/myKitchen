@@ -29,7 +29,7 @@
   
   <?php
 
-         $stripeProfile=$stripeIcons=$stripeRecipes='';
+         $stripeProfile=$stripeIcons=$stripeRecipes=$stripeNotifs='';
 
          $urlAcctuiel = Route::getCurrentRoute()->uri();
 
@@ -43,7 +43,11 @@
          else if($urlAcctuiel == 'recettesC'){
              $stripeRecipes='active';
          }
+         else if($urlAcctuiel == 'notifsC'){
+             $stripeNotifs='active';
+         }
 
+        
 
   ?>
 
@@ -83,6 +87,12 @@
               </a>
             </li>
             <li class="nav-item" style="margin-top: 30px;">
+              <a class="nav-link <?php echo $stripeNotifs ?>" href="{{route('notifsC')}}">
+                <i class="ni ni-bell-55 text-green"></i>
+                <b><span class="nav-link-text">Notifications</span></b>
+              </a>
+            </li>
+            <li class="nav-item" style="margin-top: 30px;">
               <a class="nav-link <?php echo $stripeIcons ?>" href="{{route('iconsC')}}">
                 <i class="ni ni-planet text-orange"></i>
                 <b><span class="nav-link-text">Icons</span></b>
@@ -102,7 +112,7 @@
 
     @yield('content')
 
-
+  <div class="container-fluid mt-3">
     <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-lg-6">
@@ -126,9 +136,9 @@
         </div>
       </footer>
     </div>
-    
+   </div>  
     @stack('javascripts')
-  </div>
+  
 
 
   <!-- Argon Scripts -->

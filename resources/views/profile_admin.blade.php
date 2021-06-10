@@ -63,6 +63,11 @@
                   <span>My profile</span>
                 </a>
                 <div class="dropdown-divider"></div>
+                <a href="{{route('myKitchen')}}" class="dropdown-item">
+                  <i class="ni ni-bold-left"></i>
+                  <span>Go to home page</span>
+                </a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                   <i class="ni ni-user-run"></i>
                   <span>{{ __('Logout') }}</span>

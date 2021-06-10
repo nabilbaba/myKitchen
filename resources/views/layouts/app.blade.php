@@ -94,9 +94,29 @@
                         </ul> -->
                     <!-- </li> -->
                     <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                    
+                    @guest
                     <li><a class="nav-link scrollto" href="{{route('login')}}">Login</a></li>
+                    @else
+                    @if(Auth::user()->type_compte == 'c')
                     
+                    <li><a class="nav-link scrollto" href="{{route('profileC')}}">My space</a></li>
+                    <li><a class="nav-link scrollto" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}"method="POST" style="display: none;">
+                        @csrf
+                        </form> 
+                    </li>
+                    
+                    
+                    @elseif(Auth::user()->type_compte == 'a')
+                    <li><a class="nav-link scrollto" href="{{route('statistiques')}}">My space</a></li>
+                    <li><a class="nav-link scrollto" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}"method="POST" style="display: none;">
+                        @csrf
+                        </form> 
+                    </li>
+                    @endif
+                    
+                    @endguest
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>

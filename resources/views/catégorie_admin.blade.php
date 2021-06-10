@@ -54,17 +54,29 @@
            
            success:function(response){
               console.log(response)
-              $('#categorieModal').modal('toggle');
-              $('#categorieForm')[0].reset();
-              $('#divid').load(' #divid');
+              var html = '';
+              if(response.errors){
+
+                html = '<div class="alert alert-danger mt-3">';
+                for(var count = 0; count < response.errors.length; count++)
+                {
+                  html += '<p>' + response.errors[count] + '</p>';
+                }
+                html += '</div>';
+                
+
+              }
+              else{
+                $('.modal').modal('hide');
+                $('#categorieForm')[0].reset();
+
+                $('#divid').load(' #divid');
+                
+                
+              }
+              $('#categorie_result').html(html);
               
            },
-
-           //error:function(response){
-              
-             // $('#libelle').text(response.responseJSON.errors.libelle);
-
-           //},
         });
        });
       });
@@ -98,9 +110,28 @@
            },
            
            success:function(response){
-              $('#categorieEditModal').modal('toggle');
-              $('#categorieEditForm')[0].reset();
-              $('#divid').load(' #divid');
+              console.log(response)
+              var html = '';
+              if(response.errors){
+
+                html = '<div class="alert alert-danger mt-3">';
+                for(var count = 0; count < response.errors.length; count++)
+                {
+                  html += '<p>' + response.errors[count] + '</p>';
+                }
+                html += '</div>';
+                
+
+              }
+              else{
+                $('.modal').modal('hide');
+                $('#categorieEditForm')[0].reset();
+
+                $('#divid').load(' #divid');
+                
+                
+              }
+              $('#categorie_result1').html(html);
               
            },
         });

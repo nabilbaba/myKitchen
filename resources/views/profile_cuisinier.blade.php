@@ -59,6 +59,11 @@
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
                 </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{route('myKitchen')}}" class="dropdown-item">
+                  <i class="ni ni-bold-left"></i>
+                  <span>Go to home page</span>
+                </a>
                 <div class="dropdown-divider"></div>              
                 <a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                   <i class="ni ni-user-run"></i>
@@ -105,10 +110,11 @@
             <div class="card-body pt-0 text-white">
               <div class="text-center " style="margin-top: 100px;">
                 <h5 class="h3 text-white">
-                  @{{ profilcuisinier.first_name }} @{{ profilcuisinier.last_name }}<span class="font-weight-light"> @php
+                  @{{ profilcuisinier.first_name }} @{{ profilcuisinier.last_name }}<span class="font-weight-light">
+                   @php
                        $birthday = $cuisinier->date_of_birth;
                         $age = Carbon\Carbon::parse($birthday)->diff(Carbon\Carbon::now())->format(',%y years');
-                     @endphp
+                  @endphp
 
                       {{$age}}</span>
                 </h5>

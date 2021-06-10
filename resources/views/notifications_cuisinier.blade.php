@@ -1,9 +1,9 @@
-@extends('layouts.template_admin')
+@extends('layouts.template_cuisinier')
 
 @section('content')
 
-<head><title>Deactivated accounts</title></head>
-
+<head><title>Notifications</title></head>
+  
     <!-- Topnav -->
     <nav class="navbar navbar-top navbar-expand navbar-dark bg-moncef border-bottom">
       <div class="container-fluid ">
@@ -49,7 +49,7 @@
                     <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">{{ $admin->first_name }} {{ $admin->last_name }}</span>
+                    <span class="mb-0 text-sm  font-weight-bold">{{$cuisinier->first_name}} {{$cuisinier->last_name}}</span>
                   </div>
                 </div>
               </a>
@@ -88,8 +88,8 @@
               <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark" style="margin-left: -20px;">
                   <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item"><a href="#">Users</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Users</li>
+                  <li class="breadcrumb-item"><a href="#">notification</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Recipes</li>
                 </ol>
               </nav>
             </div>
@@ -99,122 +99,105 @@
     </div>
     <!-- Page content -->
     <div class="container-fluid mt--6">
-      
-      <!-- Dark table -->
-      <div class="row" id="app">
+      <div class="row">
         <div class="col">
           <div class="card bg-default shadow">
-            <div class="card-header bg-transparent border-0">
-              <h3 class="text-white mb-0">Deactivated accounts</h3>
-              <a href="{{route('cuisiniers')}}">
-                <!--button type="button" class="btn btn-outline-neutral  btn-sm float-right" style="margin-top: -25px;" >
-                  <b>Back to users menu</b>
-                </button-->
-                <img src="assetsAdmin/icons/retour.png" alt="..." class="float-right" style="margin-top: -25px; cursor: pointer" data-toggle="tooltip" title="Back to user menu" data-placement="top" />
-              </a>
+            <!-- Card header -->
+            <div class="card-header border-0 bg-default shadow ">
+              <h3 class="mb-0" style="color: white;">Recipes notifications</h3>
             </div>
+            <!-- Light table -->
             <div class="table-responsive">
-              <table class="table align-items-center table-dark table-flush">
+              <table class="table align-items-center table-dark table-flush ">
                 <thead class="thead-dark">
                   <tr>
-                    <th scope="col" class="sort" >The cooker</th>
-                    <th scope="col" class="sort" >Email</th>
-                    <th scope="col" class="sort" >Phone number</th>
-                    <th scope="col">created_at</th>
-                    <th scope="col"></th>
+                    <th scope="col" class="sort" >The Recipe</th>
+                    <th scope="col" class="sort">created_at</th>
+                    <th></th>
+                    <th></th>
                   </tr>
                 </thead>
-                <tbody class="list">
-                  <tr v-for="cuisrecup in cuisiniersrecup">
+                <tbody class="list" >
+                  @foreach($notifications as $notifs)
+                  <?php if ($notifs->deleted_at != null): ?>
+                    <tr>
                     <th scope="row">
                       <div class="media align-items-center">
-                        <a href="#" class="avatar rounded-circle mr-3">
-                          <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
-                        </a>
                         <div class="media-body">
-                          <span class="name mb-0 text-sm">@{{cuisrecup.first_name}} @{{cuisrecup.last_name}}</span>
+                          <span class="name mb-0 text-sm">{{$notifs->titre}}</span>
                         </div>
                       </div>
                     </th>
-                    <td >
-                      @{{cuisrecup.email}}
+                    <td>
+                      {{$notifs->created_at}}
+                    </td>
+                    <td class="text-right" style="text-transform: uppercase;">
+                      <!--div class="dropdown" style="margin-left: 100px;">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v" ></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" >
+                          <a class="dropdown-item" href="#" >See more</a> 
+                        </div>
+                      </div-->
+                      your recipe has been refused by an administrator
                     </td>
                     <td>
-                      @{{cuisrecup.num}}
-                    </td>
-                    <td>
-                      @{{cuisrecup.created_at}}
-                    </td>
-                    <td>
-                      <!--button type="button" class="btn btn-outline-success  btn-sm " v-on:click="recupConfirmer(cuisrecup)">
-                        <b>Activate</b>
+                      <!--button type="button" class="btn btn-outline-success  btn-sm " style="margin-left: 100px;">
+                       <b>validate</b>
                       </button-->
-                      <img src="assetsAdmin/icons/activer.png" alt="..." v-on:click="recupConfirmer(cuisrecup)" data-toggle="tooltip" title="Activate" data-placement="top" style="cursor: pointer;">
+                      
+                      <!--button type="button" class="btn btn-outline-danger  btn-sm " style="margin-right: 20px;">
+                       <b>delete</b>
+                      </button-->
+                      
                     </td>
                   </tr>
+                  <?php endif ?>
+
+                  <?php if ($notifs->accepte == 1): ?>
+                    <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <span class="name mb-0 text-sm">{{$notifs->titre}}</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      {{$notifs->created_at}}
+                    </td>
+                    <td class="text-right" style="text-transform: uppercase;">
+                      <!--div class="dropdown" style="margin-left: 100px;">
+                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fas fa-ellipsis-v" ></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow" >
+                          <a class="dropdown-item" href="#" >See more</a> 
+                        </div>
+                      </div-->
+                      your recipe has been accepted by an administrator
+                    </td>
+                    <td>
+                      <!--button type="button" class="btn btn-outline-success  btn-sm " style="margin-left: 100px;">
+                       <b>validate</b>
+                      </button-->
+                      
+                      <!--button type="button" class="btn btn-outline-danger  btn-sm " style="margin-right: 20px;">
+                       <b>delete</b>
+                      </button-->
+                      
+                    </td>
+                  </tr>
+                  <?php endif ?>
+                 @endforeach
                 </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
-    </div>
+  </div>
 
 
 @endsection
-
-@push('scripts')
-
-
-
-<script>
- 
-        window.Laravel = {!! json_encode([
-               'csrfToken' => csrf_token(),
-                'cuisinier_recup' => $cuisinier_recup,
-                'url'      => url('/')  
-          ]) !!};
-</script>
-<script>
-    var app = new Vue({
-
-    el: '#app',
-    data:{
-        
-        cuisiniersrecup:[],           
-      },
-    methods: {
-        recupCuisinier: function(){
-        axios.get(window.Laravel.url+'/recup-cuisinier')
-
-            .then(response => {
-                 this.cuisiniersrecup = window.Laravel.cuisinier_recup;
-            })
-            .catch(error =>{
-                 console.log('errors :' , error);
-            })
-      },
-      recupConfirmer:function(rec){
-            if(confirm("do you really want to activate this user ?"))
-            {
-              axios.get(window.Laravel.url+'/recup-confirmer/'+rec.id) 
-              .then(response =>{
-                if(response.data.etat){   
-                    var position = this.cuisiniersrecup.indexOf(rec);
-                    this.cuisiniersrecup.splice(position,1);   
-                }
-                         
-              })
-              .catch(error => {
-                  console.log('errors : ',error)
-              })
-            }
-        },
-    },
-    created:function(){
-      this.recupCuisinier();
-    }
-  });
-</script>
-
-@endpush

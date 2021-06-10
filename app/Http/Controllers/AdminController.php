@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use App\Categorie;
+use App\Recette;
+use App\Ingredient;
 use App\Cuisinier;
 use DB;
 
@@ -65,20 +67,22 @@ class AdminController extends Controller
 
     public function addCategorie(Request $request){
         
-        $validator = Validator::make($request->all(),[
-               
-               'libelle'  => 'required|string',
-        ]);      
-        if ($validator->fails()){
-            return Response()->json(['errors' => 'il ya un erreur']);
-        }
-        else{
+        $rules = array(
+            'libelle'   => 'required|unique:categories|string|max:255',                    
+        );
+        
+        $error = Validator::make($request->all(),$rules);
+
+        if($error->fails())
+        {
+            return Response()->json(['errors' => $error->errors()->all()]);
+        }      
+
         $categorie = new Categorie();
         $categorie->libelle = $request->libelle;
         $categorie->save();
         
         return Response()->json($categorie); 
-      }
     }
 
     public function getCategorieById($id){
@@ -89,6 +93,17 @@ class AdminController extends Controller
     }
 
     public function updateCategorie(Request $request){
+
+        $rules = array(
+            'libelle'   => 'required|unique:categories|string|max:255',                    
+        );
+        
+        $error = Validator::make($request->all(),$rules);
+
+        if($error->fails())
+        {
+            return Response()->json(['errors' => $error->errors()->all()]);
+        }
 
         $categorie = Categorie::find($request->id);
         $categorie->libelle = $request->libelle;
@@ -109,21 +124,15 @@ class AdminController extends Controller
 
         $admin=Admin::find(Auth::user()->id);
         $cuisinier = Cuisinier::orderBy('id','asc')->where('deleted_at',null)->paginate(10);
-        return view('utilisateurs_admin',['cuisinier'=>$cuisinier,'admin'=>$admin])->with('no', 1);
-
+        $recettes = Recette::all();
+        return view('utilisateurs_admin',compact('admin','cuisinier','recettes'))->with('no', 1);
     }
 
 
-
-    public function getDetailsCuis(Request $request)
-    {
-       $details_cuisinier = \DB::table('cuisiniers')->where('id', $request->idC)->get();
-       return $details_cuisinier;
-    }
 
     public function desactiverCuisinier($id){
          $cuisinier = Cuisinier::where('id',$id)->update(['deleted_at' => new \dateTime]);
-        return Response()->json(['etat' => true]);
+         return Response()->json($cuisinier);
     }
 
     public function recupererCuisinier(){
@@ -137,5 +146,64 @@ class AdminController extends Controller
         $cuisinier = \DB::table('cuisiniers')->where('id', $id)->update(['deleted_at' => null]);
         return Response()->json(['etat' => true]);
     }
-   
+
+    public function accpterRecipe(){
+       
+       $admin=Admin::find(Auth::user()->id);
+       $recettes = \DB::table('recettes')->where([['deleted_at',null],['line',0]])->get();
+       $cuisiniers = Cuisinier::all();
+       $ingredients = Ingredient::all();
+       return view('publications_admin',compact('admin','recettes','cuisiniers','ingredients'));
+
+    }
+
+    public function refuseRecipe($id){
+        $recette = Recette::where('id',$id)->update(['deleted_at' => new \dateTime]);
+        return Response()->json($recette);
+    }
+
+    public function validerRecipe($id){
+       $recette = Recette::where('id',$id)->update(['accepte' => 1]);
+       return Response()->json($recette);   
+    }
+
+    public function deleteLine($id){
+      
+      $recette = Recette::where('id',$id)->update(['line' => 1]);
+      return Response()->json($recette);   
+    }
+
+    public function getRecettes(){
+
+        $admin=Admin::find(Auth::user()->id);
+        $recettes = Recette::where('line',0)->get();
+        $cuisinier = Cuisinier::all();
+        $ingredients = Ingredient::all();
+
+        return view('recettes_admin',compact('admin','recettes','cuisinier','ingredients'));
+    }
+    public function deleteRecipeAdmin($id){
+       
+        $recette = Recette::where('id',$id)->update(['line' => 1]);
+        return Response()->json($recette);
+    }
+
+    public function getRecettesDate(){
+           
+        $admin=Admin::find(Auth::user()->id);
+        $recettes = Recette::orderBy('created_at','asc')->get();
+        $cuisinier = Cuisinier::all();
+        $ingredients = Ingredient::all();
+
+        return Response()->json(['admin'=>$admin,'recettes'=>$recettes,'cuisinier'=>$cuisinier,'ingredients'=>$ingredients]);
+     }
+
+     public function searchUser(Request $request){
+        $admin = Admin::find(Auth::user()->id);
+        $search = $request->get('sear');
+        $recettes = Recette::all();
+        $cuisinier =\DB::table('cuisiniers')->where([['first_name', 'like', '%'.$search.'%'],['deleted_at',null]])->orWhere([['last_name', 'like', '%'.$search.'%'],['deleted_at',null]])->get();
+        
+     return view('searchUser_admin',compact('recettes','admin','cuisinier'))->with('no', 1);
+     }
 }

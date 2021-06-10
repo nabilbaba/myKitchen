@@ -43,8 +43,8 @@
 
                        <div class="bg bg-dark mt-3 " style="height: 155px;">
                        <br>
-                       <div class="second py-2 px-2 ml-2">
-                       <span class="text2 center">
+                       <div class="second py-2 px-2 ml-2" >
+                       <span class="text2 center" >
                        oh this is greate , i like this</span>
                        </div>
                        <br>

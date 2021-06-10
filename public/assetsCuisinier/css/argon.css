@@ -20973,7 +20973,336 @@ textarea[resize='horizontal']
 {
     color: #fff;
 }
+/* css modal1 */
+.modal1-title
+{
+    font-size: 1.0625rem;
+}
 
+.modal1-fluid .modal1-dialog
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.modal1-fluid .modal1-content
+{
+    border-radius: 0;
+}
+
+.modal1-primary .modal1-title
+{
+    color: #fff;
+}
+
+.modal1-primary .modal1-header,
+.modal1-primary .modal1-footer
+{
+    border-color: rgba(255, 255, 255, .075);
+}
+
+.modal1-primary .modal1-content
+{
+    color: #fff; 
+    background-color: #5e72e4;
+}
+.modal1-primary .modal1-content .heading
+{
+    color: #fff;
+}
+
+.modal1-primary .close > span:not(.sr-only)
+{
+    color: #fff;
+}
+
+.modal1-secondary .modal1-title
+{
+    color: #212529;
+}
+
+.modal1-secondary .modal1-header,
+.modal1-secondary .modal1-footer
+{
+    border-color: rgba(33, 37, 41, .075);
+}
+
+.modal1-secondary .modal1-content
+{
+    color: #212529; 
+    background-color: #f7fafc;
+}
+.modal1-secondary .modal1-content .heading
+{
+    color: #212529;
+}
+
+.modal1-secondary .close > span:not(.sr-only)
+{
+    color: #fff;
+}
+
+.modal1-success .modal1-title
+{
+    color: #fff;
+}
+
+.modal1-success .modal1-header,
+.modal1-success .modal1-footer
+{
+    border-color: rgba(255, 255, 255, .075);
+}
+
+.modal1-success .modal1-content
+{
+    color: #fff; 
+    background-color: #2dce89;
+}
+.modal1-success .modal1-content .heading
+{
+    color: #fff;
+}
+
+.modal1-success .close > span:not(.sr-only)
+{
+    color: #fff;
+}
+
+.modal1-info .modal1-title
+{
+    color: #fff;
+}
+
+.modal1-info .modal1-header,
+.modal1-info .modal1-footer
+{
+    border-color: rgba(255, 255, 255, .075);
+}
+
+.modal1-info .modal1-content
+{
+    color: #fff; 
+    background-color: #11cdef;
+}
+.modal1-info .modal1-content .heading
+{
+    color: #fff;
+}
+
+.modal1-info .close > span:not(.sr-only)
+{
+    color: #fff;
+}
+
+.modal1-warning .modal1-title
+{
+    color: #fff;
+}
+
+.modal1-warning .modal1-header,
+.modal1-warning .modal1-footer
+{
+    border-color: rgba(255, 255, 255, .075);
+}
+
+.modal1-warning .modal1-content
+{
+    color: #fff; 
+    background-color: #fb6340;
+}
+.modal1-warning .modal1-content .heading
+{
+    color: #fff;
+}
+
+.modal1-warning .close > span:not(.sr-only)
+{
+    color: #fff;
+}
+
+.modal1-danger .modal1-title
+{
+    color: #fff;
+}
+
+.modal1-danger .modal1-header,
+.modal1-danger .modal1-footer
+{
+    border-color: rgba(255, 255, 255, .075);
+}
+
+.modal1-danger .modal1-content
+{
+    color: #fff; 
+    background-color: #f5365c;
+}
+.modal1-danger .modal1-content .heading
+{
+    color: #fff;
+}
+
+.modal1-danger .close > span:not(.sr-only)
+{
+    color: #fff;
+}
+
+.modal1-light .modal1-title
+{
+    color: #fff;
+}
+
+.modal1-light .modal1-header,
+.modal1-light .modal1-footer
+{
+    border-color: rgba(255, 255, 255, .075);
+}
+
+.modal1-light .modal1-content
+{
+    color: #fff; 
+    background-color: #adb5bd;
+}
+.modal1-light .modal1-content .heading
+{
+    color: #fff;
+}
+
+.modal1-light .close > span:not(.sr-only)
+{
+    color: #fff;
+}
+
+.modal1-dark .modal1-title
+{
+    color: #fff;
+}
+
+.modal1-dark .modal1-header,
+.modal1-dark .modal1-footer
+{
+    border-color: rgba(255, 255, 255, .075);
+}
+
+.modal1-dark .modal1-content
+{
+    color: #fff; 
+    background-color: #212529;
+}
+.modal1-dark .modal1-content .heading
+{
+    color: #fff;
+}
+
+.modal1-dark .close > span:not(.sr-only)
+{
+    color: #fff;
+}
+
+.modal1-default .modal1-title
+{
+    color: #fff;
+}
+
+.modal1-default .modal1-header,
+.modal1-default .modal1-footer
+{
+    border-color: rgba(255, 255, 255, .075);
+}
+
+.modal1-default .modal1-content
+{
+    color: #fff; 
+    background-color: #172b4d;
+}
+.modal1-default .modal1-content .heading
+{
+    color: #fff;
+}
+
+.modal1-default .close > span:not(.sr-only)
+{
+    color: #fff;
+}
+
+.modal1-white .modal1-title
+{
+    color: #212529;
+}
+
+.modal1-white .modal1-header,
+.modal1-white .modal1-footer
+{
+    border-color: rgba(33, 37, 41, .075);
+}
+
+.modal1-white .modal1-content
+{
+    color: #212529; 
+    background-color: #fff;
+}
+.modal1-white .modal1-content .heading
+{
+    color: #212529;
+}
+
+.modal1-white .close > span:not(.sr-only)
+{
+    color: #fff;
+}
+
+.modal1-neutral .modal1-title
+{
+    color: #212529;
+}
+
+.modal1-neutral .modal1-header,
+.modal1-neutral .modal1-footer
+{
+    border-color: rgba(33, 37, 41, .075);
+}
+
+.modal1-neutral .modal1-content
+{
+    color: #212529; 
+    background-color: #fff;
+}
+.modal1-neutral .modal1-content .heading
+{
+    color: #212529;
+}
+
+.modal1-neutral .close > span:not(.sr-only)
+{
+    color: #fff;
+}
+
+.modal1-darker .modal1-title
+{
+    color: #fff;
+}
+
+.modal1-darker .modal1-header,
+.modal1-darker .modal1-footer
+{
+    border-color: rgba(255, 255, 255, .075);
+}
+
+.modal1-darker .modal1-content
+{
+    color: #fff; 
+    background-color: black;
+}
+.modal1-darker .modal1-content .heading
+{
+    color: #fff;
+}
+
+.modal1-darker .close > span:not(.sr-only)
+{
+    color: #fff;
+}
+
+/* fin css modal1 */
 .navbar-horizontal .navbar-nav .nav-link
 {
     font-size: .875rem;

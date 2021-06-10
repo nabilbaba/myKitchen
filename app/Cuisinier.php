@@ -18,4 +18,8 @@ class Cuisinier extends Model
     {
         return $this->belongsTo('App\User');
     }
+    public function recette()
+    {
+        return $this->hasMany('App\Recette');
+    }
 }
