@@ -20,8 +20,8 @@
 
                             </div>
                         </div>
-<br><br>
-                        <div class="p-3 mt-2 rating d-flex align-items-center justify-content-center w-auto">
+<br><br> <br> <br>
+                        <div id="stars" class="comment1 p-3 mt-2 rating d-flex align-items-center justify-content-center w-auto">
                         <h4>EVALUATE THIS WORK</h4> <br>
 	                       <div class="stars">
 		                      <i class="fa fa-star gold" onClick="star(1)"></i>
@@ -30,18 +30,12 @@
 		                      <i class="fa fa-star"onClick="star(4)"></i>
 		                      <i class="fa fa-star" onClick="star(5)"></i>
                         </div>
-
-
-
-<br>
-
-
-                       <textarea id="myTextarea" class="form-control"  rows="2" placeholder="add your comment..." required></textarea>
+<br>                     <div id="send"class="text-center"><button type="button" class="btn btn-outline-light" onclick="evaluation()">SEND</button></div>
+                       <!-- <textarea id="myTextarea" class="form-control"  rows="2" placeholder="what is your view?" required></textarea> -->
                        </div>
-                       <br>
-                       <div class="text-center"><button type="submit" onclick="comment()">SEND</button></div>
 
-                       <div class="bg bg-dark mt-3 " style="height: 155px;">
+                       <br>
+                       <!-- <div class="bg bg-dark mt-3 " style="height: 155px;">
                        <br>
                        <div class="second py-2 px-2 ml-2" >
                        <span class="text2 center" >
@@ -51,15 +45,9 @@
                        <div class="second py-2 px-2 ml-2">
                        <span class="text2"></span>
                        </div>
-                       </div>
-
+                       </div> -->
                 <!-- <div><span class="text3"></span><span class="thumbup"><i class="fa fa-thumbs-o-up"></i></span><span class="text4">3</span></div> -->
-
-
                         </div>
-
-
-
                     <div class="col-lg-4">
                         <div class="portfolio-info">
                             <h2>REPICE INFORMATION</h2>
@@ -95,7 +83,51 @@
                     </div>
 
                 </div>
+                <div class="bg bg-dark">
+<!-- Main Body -->
+<form onsubmit="return false">
 
+<section >
+    <div class="container">
+        <div class="row">
+            <div id="palestine" class="col-sm-5 col-md-6 col-12 pb-4" >
+                <h1>Comments</h1>
+                <!-- <div class="comment mt-4 text-justify float-left"> <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">
+                    <h4>Jhon Doe</h4> <span>- 20 October, 2018</span> <br>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                </div> -->
+                <!-- <div class="text-justify darker mt-4 float-right"> <img src="https://i.imgur.com/CFpa3nK.jpg" alt="" class="rounded-circle" width="40" height="40">
+                    <h4>Rob Simpson</h4> <span>- 20 October, 2018</span> <br>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                </div> -->
+                <!-- <div class="comment mt-4 text-justify"> <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">
+                    <h4>Jhon Doe</h4> <span>- 20 October, 2018</span> <br>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                </div>
+                <div class="darker mt-4 text-justify"> <img src="https://i.imgur.com/CFpa3nK.jpg" alt="" class="rounded-circle" width="40" height="40">
+                    <h4>Rob Simpson</h4> <span>- 20 October, 2018</span> <br>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
+                </div> -->
+            </div>
+            <div  id="gaza" class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
+                <form id="algin-form" class="formmsg">
+                    <div class="form-group1">
+                        <h4>Leave a comment</h4> <label for="message">Message</label> <textarea name="msg" id="msg" msg cols="30" rows="5" class="form-control" onchange="changemsg()" style="background-color: black;"></textarea>
+                    </div>
+                    <div class="form-group1"> <label for="name">Name</label> <input type="text" name="name" id="fullname"  class="form-control" onchange="changename()"> </div>
+                    <div class="form-group1"> <label for="email">Email</label> <input type="text" name="email" id="email" class="form-control"> </div>
+                    <div class="form-group1">
+                        <p class="text-secondary">If you have a <a href="#" class="alert-link">gravatar account</a> your address will be used to display your profile picture.</p>
+                    </div>
+                    <div class="form-inline"> <input type="checkbox" name="check" id="checkbx" class="mr-1"> <label for="subscribe">Subscribe me to the newlettter</label> </div>
+                    <div class="form-group1"> <button type="button" id="post" class="btn" onclick="comment22()">Post Comment</button> </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</form>
+</div>
             </div>
         </section>
 

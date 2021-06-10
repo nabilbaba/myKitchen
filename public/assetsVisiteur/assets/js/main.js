@@ -311,12 +311,75 @@ function star(a) {
 
 }
 
-function comment() {
-    var x = document.getElementById("myTextarea").value;
-    console.log(x);
-    document.getElementsById("testerfuck").innerHTML = x;
+function evaluation() {
+    document.getElementById("stars").innerHTML = "";
+    //document.getElementsByClassName("comment1 p-3 mt-2 rating d-flex align-items-center justify-content-center w-auto").className = " ";
+    document.getElementById("stars").innerHTML = " <br><h1>* THANK YOU *</h1>";
+}
+var border = 0;
+const monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+]
+
+function changename() {
+
+    var name = document.getElementById('fullname').value;
+    // var kassam = document.getElementById('gaza').childNodes[1].childNodes[3].childNodes[3].nodeValue;
+    // console.log(kassam);
+    return name;
+}
+
+function changemsg() {
+
+    var msg = document.getElementById('msg').value;
+    // var kassam = document.getElementById('gaza').childNodes[1].childNodes[3].childNodes[3].nodeValue;
+    // console.log(kassam);
+    return msg;
+}
 
 
-    //document.getElementById("comment").innerHTML = "<h4> THANK YOU! </h4>";
-
+function comment22() {
+    if (border == 0) {
+        var a = document.createElement("DIV");
+        a.className = "comment mt-4 text-justify float-left";
+        var b = document.createElement("IMG");
+        b.className = "rounded-circle";
+        b.src = "https://i.imgur.com/yTFUilP.jpg";
+        b.width = "40";
+        b.height = "40";
+        var c = document.createElement("H4");
+        c.innerHTML = " " + changename()
+        var d = document.createElement("SPAN");
+        var date = new Date();
+        d.innerHTML = " - " + date.getDay() + " " + monthNames[date.getMonth()] + "," + date.getFullYear() + "<br>";
+        var e = document.createElement("P");
+        e.innerHTML = changemsg().toString();
+        document.getElementById("palestine").appendChild(a);
+        a.appendChild(b);
+        a.appendChild(c);
+        a.appendChild(d);
+        a.appendChild(e);
+        border = 1;
+    } else {
+        var a = document.createElement("DIV");
+        a.className = "text-justify darker mt-4 float-left";
+        var b = document.createElement("IMG");
+        b.className = "rounded-circle";
+        b.src = "https://i.imgur.com/yTFUilP.jpg";
+        b.width = "40";
+        b.height = "40";
+        var c = document.createElement("H4");
+        c.innerHTML = " " + changename();
+        var d = document.createElement("SPAN");
+        var date = new Date();
+        d.innerHTML = " - " + date.getDay() + " " + monthNames[date.getMonth()] + ", " + date.getFullYear() + "<br>";
+        var e = document.createElement("P");
+        e.innerHTML = changemsg().toString();
+        document.getElementById("palestine").appendChild(a);
+        a.appendChild(b);
+        a.appendChild(c);
+        a.appendChild(d);
+        a.appendChild(e);
+        border = 0;
+    }
 }
