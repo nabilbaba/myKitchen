@@ -8,7 +8,7 @@
   <meta name="author" content="Creative Tim">
 
   <!-- Favicon -->
-  <link rel="icon" href="assetsCuisinier/img/brand/N.png" type="image/png">
+  <link rel="icon" href="assetsAdmin/img/brand/N.png" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
@@ -17,9 +17,20 @@
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assetsCuisinier/css/argon.css?v=1.2.0" type="text/css">
 
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous">
+  </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+  </script>
+  
+  <script src="{{ asset('js/vue.js') }}"></script>
+  <script src="{{ asset('js/axios.min.js') }}"></script>
+
+
   <?php
 
-         $stripeProfile=$stripeIcons=$stripeRecipes='';
+         $stripeProfile=$stripeIcons=$stripeRecipes=$stripeNotifs='';
 
          $urlAcctuiel = Route::getCurrentRoute()->uri();
 
@@ -33,6 +44,10 @@
          else if($urlAcctuiel == 'recettesC'){
              $stripeRecipes='active';
          }
+         else if($urlAcctuiel == 'notifsC'){
+             $stripeNotifs='active';
+         }
+        
 
 
   ?>
@@ -72,6 +87,12 @@
               </a>
             </li>
             <li class="nav-item" style="margin-top: 30px;">
+              <a class="nav-link <?php echo $stripeNotifs ?>" href="{{route('notifsC')}}">
+                <i class="ni ni-bell-55 text-green"></i>
+                <b><span class="nav-link-text">Notifications</span></b>
+              </a>
+            </li>
+            <li class="nav-item" style="margin-top: 30px;">
               <a class="nav-link <?php echo $stripeIcons ?>" href="{{route('iconsC')}}">
                 <i class="ni ni-planet text-orange"></i>
                 <b><span class="nav-link-text">Icons</span></b>
@@ -90,24 +111,21 @@
 
     @yield('content')
 
-
+   <div class="container-fluid mt-3">
     <footer class="footer pt-0">
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-lg-6">
             <div class="copyright text-center  text-lg-left  text-muted">
-              &copy; 2021 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+              &copy; 2021 <a href="{{route('myKitchen')}}" class="font-weight-bold ml-1" target="_blank">myKitchen</a>
             </div>
           </div>
           <div class="col-lg-6">
             <ul class="nav nav-footer justify-content-center justify-content-lg-end">
               <li class="nav-item">
-                <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
+                <a href="{{route('myKitchen')}}" class="nav-link" target="_blank">My Kitchen</a>
               </li>
               <li class="nav-item">
                 <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
               </li>
               <li class="nav-item">
                 <a href="https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md" class="nav-link" target="_blank">MIT License</a>
@@ -121,7 +139,7 @@
 
   <!-- Argon Scripts -->
   <!-- Core -->
-  <script src="assetsCuisinier/vendor/jquery/dist/jquery.min.js"></script>
+  @stack('scripts')
   <script src="assetsCuisinier/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="assetsCuisinier/vendor/js-cookie/js.cookie.js"></script>
   <script src="assetsCuisinier/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>

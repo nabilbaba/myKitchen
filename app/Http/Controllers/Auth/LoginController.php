@@ -22,6 +22,7 @@ class LoginController extends Controller
 
     use AuthenticatesUsers;
 
+
     /**
      * Where to redirect users after login.
      *
@@ -31,7 +32,7 @@ class LoginController extends Controller
     {
       
       
-        if(Auth::user()->type_compte == "c" ){
+        if((Auth::user()->type_compte == "c" )){
                 return RouteServiceProvider::CUISINIER;
         }
         elseif (Auth::user()->type_compte == "a" ) {

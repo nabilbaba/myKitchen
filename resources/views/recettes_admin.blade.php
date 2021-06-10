@@ -49,7 +49,7 @@
                     <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">Babaahmed Nabil</span>
+                    <span class="mb-0 text-sm  font-weight-bold">{{$admin->first_name}} {{$admin->last_name}}</span>
                   </div>
                 </div>
               </a>
@@ -60,6 +60,11 @@
                 <a href="{{route('profileA')}}" class="dropdown-item">
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{route('myKitchen')}}" class="dropdown-item">
+                  <i class="ni ni-bold-left"></i>
+                  <span>Go to home page</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -103,7 +108,7 @@
               <h3 class="text-white mb-0">Recipes details</h3>
                <div class="col-lg-12  text-right" style="margin-top: -25px;">
                  <!--a href="#" class="btn btn-sm btn-outline-neutral">Sort by date</a-->
-                 <img src="assetsAdmin/icons/trier.png" alt="..." data-toggle="tooltip" title="Sort by date" data-placement="top" style="cursor: pointer;" />
+                 <img src="assetsAdmin/icons/trier.png" alt="..." data-toggle="tooltip" title="Sort by date" id="getData" data-placement="top" style="cursor: pointer;" />  
                </div>
              </div>
             <div class="table-responsive">
@@ -112,33 +117,40 @@
                   <tr>
                     <th scope="col" class="sort" data-sort="name">The Recipe</th>
                     <th scope="col" class="sort" data-sort="budget">Created at</th>
-                    <th scope="col" class="sort" data-sort="completion">Ingredients</th>
+                    <th scope="col" class="sort" data-sort="completion">level</th>
                     <th scope="col">The cooker</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody class="list">
-                  <tr>
+                  @foreach($recettes as $rec)
+                  <?php if ($rec->accepte == 1): ?>
+                  <tr id="sid{{$rec->id}}">
                     <th scope="row">
                       <div class="media align-items-center">
                         <a href="#" class="avatar rounded-circle mr-3">
                           <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
                         </a>
-                        <div class="media-body">
-                          <span class="name mb-0 text-sm">********************</span>
-                        </div>
+                          <div class="media-body">
+                            <span class="name mb-0 text-sm" id="titre">{{$rec->titre}}</span>
+                          </div>    
                       </div>
                     </th>
-                    <td >
-                      21/09/2021
+                    <td id="created_at">
+                      {{$rec->created_at}}
                     </td>
-                    <td>
-                      ***********************************
+                    <td id="niveau">
+                      {{$rec->niveau}}
                     </td>
-                    <td>
-                      moncef
-                    </td>
+                    
+                    @foreach($cuisinier as $cui)
+                      <?php if ($rec->cuisinier_id == $cui->id): ?>
+                         <td id="first_name">
+                          {{$cui->last_name}} {{$cui->first_name}}
+                        </td>
+                      <?php endif ?>  
+                    @endforeach
                     <td class="text-right">
                       <!--div class="dropdown" style="margin-left: 20px;">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -148,15 +160,17 @@
                           <a class="dropdown-item" href="#" >See more</a>
                         </div>
                       </div-->
-                      <img src="assetsAdmin/icons/voir_plus.png" alt="..." data-toggle="tooltip" title="See more" data-placement="top" style="cursor: pointer;" />
+                      <img src="assetsAdmin/icons/voir_plus.png" alt="..." data-toggle="tooltip" title="See more" data-bs-toggle="modal" data-bs-target="#showDetailsRecipe_{{$rec->id}}" data-placement="top" style="cursor: pointer;" />
                     </td>
                     <td>
                       <!--button type="button" class="btn btn-outline-danger  btn-sm " >
                         <b>Delete</b>
                       </button-->
-                      <img src="assetsAdmin/icons/delete.png" alt="..." data-toggle="tooltip" title="Delete recipe" data-placement="top" style="cursor: pointer;">
+                      <img src="assetsAdmin/icons/delete.png" alt="..." data-toggle="tooltip" title="Delete recipe" onclick="deleteRecipe({{$rec->id}})" data-placement="top" style="cursor: pointer;">
                     </td>
                   </tr>
+                  <?php endif ?>
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -164,6 +178,105 @@
         </div>
       </div>
     </div>
+    
+    <!-- details recette modal -->
+     @foreach($recettes as $r)
+      <div class="modal fade" id="showDetailsRecipe_{{$r->id}}" tabindex="-1"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg mr-9">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">show recipe</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" >
+                <div class="container-fluid">
+                  <center><h2>{{$r->titre}}</h2></center>
+                  <h3 class="mt-5">Ingredients </h3>
+                    <div class="row">
+                      @foreach($ingredients as $ingr)
+                        <?php if ($r->id == $ingr->recette_id): ?>
+                          <div class="col-md-4">
+                            <p> {{$ingr->nom_produit}} : {{$ingr->quantité}} {{$ingr->unité}}</p>
+                          </div>  
+                        <?php endif ?>
+                      @endforeach
+                    </div>
+                    <hr>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h3> Steps </h3>
+                      <p>{{$r->etapes}} </p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <h3> Preparation Time </h3>
+                      <p>{{$r->temps_de_preparation}}</p>
+                    </div>
+                    <div class="col-md-4">
+                      <h3> Cooking Time </h3>
+                      <p>{{$r->temps_de_cuisson}}</p>
+                    </div>
+                    <div class="col-md-4">
+                      <h3>difficulty level</h3>
+                      <p>{{$r->niveau}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      @endforeach
+      <!-- fin details recipe -->
    
     
 @endsection
+
+@push('scripts')
+ 
+ <script type="text/javascript">
+      function deleteRecipe(id){
+        
+        if(confirm("do you really want to delete this recipe ?"))
+        {
+            $.ajax({
+              url:'/delete-recipeA/'+id,
+              type:'DELETE',
+              data:{
+                _token:$("input[name=_token]").val()
+              },
+              success:function(response)
+              {
+                 $('#sid'+id).remove();
+              }
+
+            })
+        }
+      }
+    </script>
+
+    <script type="text/javascript">
+      
+      $(document).ready(function() {
+        $("#getData").click(function() { 
+         $.ajax({  //create an ajax request to display.php
+          type: "GET",
+          url: "get-recipeDate/",       
+          success: function (data) {
+            $("#titre").html(data.titre);
+            $("#created_at").html(data.created_at);
+            $("#niveau").html(data.niveau);
+            $("#last_name").html(data.last_name);
+          }
+        });
+      });
+      });
+      
+      </script>
+
+@endpush

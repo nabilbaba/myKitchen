@@ -48,7 +48,7 @@
                     <img alt="Image placeholder" src="assetsCuisinier/img/theme/bootstrap.jpg">
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">Belaskri Moncef</span>
+                    <span class="mb-0 text-sm  font-weight-bold">{{$cuisinier->first_name}} {{$cuisinier->last_name}}</span>
                   </div>
                 </div>
               </a>
@@ -59,6 +59,11 @@
                 <a href="{{route('profileC')}}" class="dropdown-item">
                   <i class="ni ni-single-02"></i>
                   <span>My profile</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="{{route('myKitchen')}}" class="dropdown-item">
+                  <i class="ni ni-bold-left"></i>
+                  <span>Go to home page</span>
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

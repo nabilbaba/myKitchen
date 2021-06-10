@@ -62,6 +62,11 @@
                   <span>My profile</span>
                 </a>
                 <div class="dropdown-divider"></div>
+                <a href="{{route('myKitchen')}}" class="dropdown-item">
+                  <i class="ni ni-bold-left"></i>
+                  <span>Go to home page</span>
+                </a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                   <i class="ni ni-user-run"></i>
                   <span>{{ __('Logout') }}</span>
@@ -102,7 +107,7 @@
               <h3 class="mb-0" style="color: white;">Recipes notifications</h3>
             </div>
             <!-- Light table -->
-            <div class="table-responsive">
+            <div class="table-responsive" id="divid">
               <table class="table align-items-center table-dark table-flush ">
                 <thead class="thead-dark">
                   <tr>
@@ -113,16 +118,22 @@
                   </tr>
                 </thead>
                 <tbody class="list" >
-                  <tr>
+                  @foreach($recettes as $r)
+                  <?php if ($r->accepte == 0): ?>
+                    <tr id="sid{{$r->id}}">
                     <th scope="row">
                       <div class="media align-items-center">
                         <div class="media-body">
-                          <span class="name mb-0 text-sm">recipe 1*****************************</span>
+                          <span class="name mb-0 text-sm">{{$r->titre}}</span>
                         </div>
                       </div>
                     </th>
                     <td>
-                      nabil
+                      @foreach($cuisiniers as $c)
+                      <?php if ($c->id == $r->cuisinier_id): ?>
+                        <strong>{{$c->first_name}} {{$c->last_name}}</strong>
+                      <?php endif ?>
+                      @endforeach
                     </td>
                     <td class="text-right">
                       <!--div class="dropdown" style="margin-left: 100px;">
@@ -133,19 +144,54 @@
                           <a class="dropdown-item" href="#" >See more</a> 
                         </div>
                       </div-->
-                      <img src="assetsAdmin/icons/voir_plus.png" alt="..." class="ml-8" data-toggle="tooltip" data-placement="top" title="See more" style="cursor: pointer;"/>
+                      <img src="assetsAdmin/icons/voir_plus.png" alt="..." class="ml-8" data-toggle="tooltip" data-bs-toggle="modal" data-bs-target="#showDetailsRecipe_{{$r->id}}" data-placement="top" title="See more" style="cursor: pointer;"/>
                     </td>
                     <td>
                       <!--button type="button" class="btn btn-outline-success  btn-sm " style="margin-left: 100px;">
                        <b>validate</b>
                       </button-->
-                      <img src="assetsAdmin/icons/accepter.png" alt="..." class="ml-9" style=" cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Validate" />
+                      <img src="assetsAdmin/icons/accepter.png" alt="..." class="ml-8" style=" cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Validate" onclick="accepteRecipe({{$r->id}})" />
                       <!--button type="button" class="btn btn-outline-danger  btn-sm " style="margin-right: 20px;">
                        <b>delete</b>
                       </button-->
-                      <img src="assetsAdmin/icons/delete.png" alt="..." class="ml-4" style=" cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Refuse" />
+                      <img src="assetsAdmin/icons/delete.png" alt="..." class="ml-2" style=" cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Refuse" onclick="refuseRecipe({{$r->id}})" />
                     </td>
                   </tr>
+                  <?php endif ?>
+                  
+                  <?php if ($r->accepte == 1): ?>
+                  <tr id="sid{{$r->id}}">
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <span class="name mb-0 text-sm">{{$r->titre}}</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      @foreach($cuisiniers as $c)
+                      <?php if ($c->id == $r->cuisinier_id): ?>
+                        <strong>{{$c->first_name}} {{$c->last_name}}</strong>
+                      <?php endif ?>
+                      @endforeach
+                    </td>
+                    <td class="text-right" style="text-transform: uppercase;">
+                      <!--button type="button" class="btn btn-outline-success  btn-sm " style="margin-left: 100px;">
+                       <b>validate</b>
+                      </button-->
+                      <b class="ml-8">the recipe has been accepted successfully</b>
+                      
+                      <!--button type="button" class="btn btn-outline-danger  btn-sm " style="margin-right: 20px;">
+                       <b>delete</b>
+                      </button-->
+                    </td>
+                    <td>
+                      <img src="assetsAdmin/icons/delete.png" alt="..." class="ml-9"  style=" cursor: pointer;" data-toggle="tooltip" data-placement="top" title="Delete" onclick="deleteLine({{$r->id}})" />
+                    </td>
+                  </tr>  
+                  <?php endif ?>
+                  
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -154,5 +200,124 @@
       </div>
   </div>
 
+  <!-- details recipe -->
+      @foreach($recettes as $r)
+      <div class="modal fade" id="showDetailsRecipe_{{$r->id}}" tabindex="-1"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg mr-9">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">show recipe</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body" >
+                <div class="container-fluid">
+                  <center><h2>{{$r->titre}}</h2></center>
+                  <h3 class="mt-5">Ingredients </h3>
+                    <div class="row">
+                      @foreach($ingredients as $ingr)
+                        <?php if ($r->id == $ingr->recette_id): ?>
+                          <div class="col-md-4">
+                            <p> {{$ingr->nom_produit}} : {{$ingr->quantité}} {{$ingr->unité}}</p>
+                          </div>  
+                        <?php endif ?>
+                      @endforeach
+                    </div>
+                    <hr>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h3> Steps </h3>
+                      <p>{{$r->etapes}} </p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <h3> Preparation Time </h3>
+                      <p>{{$r->temps_de_preparation}}</p>
+                    </div>
+                    <div class="col-md-4">
+                      <h3> Cooking Time </h3>
+                      <p>{{$r->temps_de_cuisson}}</p>
+                    </div>
+                    <div class="col-md-4">
+                      <h3>difficulty level</h3>
+                      <p>{{$r->niveau}}</p>
+                    </div>
+                  </div>
+                  <hr>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      @endforeach
+      <!-- fin details recipe -->
+
 
 @endsection
+
+@push('scripts')
+
+ <script type="text/javascript">
+      function refuseRecipe(id){
+        
+        if(confirm("do you really want to refuse this recipe ?"))
+        {
+            $.ajax({
+              url:'/refuse-recipe/'+id,
+              type:'DELETE',
+              data:{
+                _token:$("input[name=_token]").val()
+              },
+              success:function(response)
+              {
+                 $('#sid'+id).remove();
+              }
+
+            })
+        }
+      }
+    </script>
+
+    <script type="text/javascript">
+      function accepteRecipe(id){
+        
+        if(confirm("do you really want to accept this recipe ?"))
+        {
+            $.ajax({
+              url:'/accepte-recipe/'+id,
+              type:'DELETE',
+              data:{
+                _token:$("input[name=_token]").val()
+              },
+              success:function(response)
+              {
+                $('#divid').load(' #divid');
+              }
+
+            })
+        }
+      }
+    </script>
+
+    <script type="text/javascript">
+      function deleteLine(id){
+        
+            $.ajax({
+              url:'/delete-line/'+id,
+              type:'DELETE',
+              data:{
+                _token:$("input[name=_token]").val()
+              },
+              success:function(response)
+              {
+                 $('#sid'+id).remove();
+              }
+
+            })
+      }
+    </script>
+
+@endpush

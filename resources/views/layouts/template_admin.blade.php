@@ -52,7 +52,7 @@
          else if($urlAcctuiel == 'cuisiniers'){
              $stripeUsers='active';
          }
-         else if($urlAcctuiel == 'recettes'){
+         else if($urlAcctuiel == 'recettes.get'){
              $stripeRecipes='active';
          }
          else if($urlAcctuiel == 'catégories'){
@@ -115,7 +115,7 @@
               </a>
             </li>
             <li class="nav-item" style="margin-top: 30px;">
-              <a class="nav-link <?php echo $stripeRecipes ?>" href="{{route('recettes')}}">
+              <a class="nav-link <?php echo $stripeRecipes ?>" href="{{route('recettes.get')}}">
                 <i class="ni ni-single-copy-04 text-pink"></i>
                 <b><span class="nav-link-text">Recipes</span></b>
               </a>

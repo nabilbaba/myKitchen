@@ -58,6 +58,11 @@
                   <span>My profile</span>
                 </a>
                 <div class="dropdown-divider"></div>
+                <a href="{{route('myKitchen')}}" class="dropdown-item">
+                  <i class="ni ni-bold-left"></i>
+                  <span>Go to home page</span>
+                </a>
+                <div class="dropdown-divider"></div>
                <a class="dropdown-item" href="{{ route('logout') }}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                   <i class="ni ni-user-run"></i>
                   <span>{{ __('Logout') }}</span>
@@ -157,6 +162,7 @@
                   <input type="text" name="libelle" id="libelle" class="form-control"  />
                 </div>
                 <button  class="btn btn-success btn-sm" >Save</button>
+                <span id="categorie_result"></span>
               </form>
             </div>
           </div>
@@ -182,6 +188,7 @@
                   <input type="text" name="libelle" id="libelleEdit" class="form-control"/>
                 </div>
                 <button  class="btn btn-warning btn-sm" >Update</button>
+                <span id="categorie_result1"></span>
               </form>
             </div>
           </div>
