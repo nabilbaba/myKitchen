@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+use Illuminate\Http\Request;
+use App\Cuisinier;
+use DB;
+
 
 class LoginController extends Controller
 {
@@ -32,14 +36,17 @@ class LoginController extends Controller
     {
       
       
-        if((Auth::user()->type_compte == "c" )){
+        if(Auth::user()->type_compte == "c"){
                 return RouteServiceProvider::CUISINIER;
         }
         elseif (Auth::user()->type_compte == "a" ) {
             return RouteServiceProvider::ADMIN;
         }
+        
 
     }
+
+    
 
     /**
      * Create a new controller instance.

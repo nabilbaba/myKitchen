@@ -45,11 +45,9 @@
             <li class="nav-item dropdown">
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
-                  <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
-                  </span>
+                  
                   <div class="media-body  ml-2  d-none d-lg-block">
-                    <span class="mb-0 text-sm  font-weight-bold">Babaahmed Nabil</span>
+                    <span class="mb-0 text-sm  font-weight-bold">{{$admin->first_name}} {{$admin->last_name}}</span>
                   </div>
                 </div>
               </a>
@@ -62,7 +60,7 @@
                   <span>My profile</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="{{route('myKitchen')}}" class="dropdown-item">
+                <a href="{{route('myKitchen.allRecettes')}}" class="dropdown-item">
                   <i class="ni ni-bold-left"></i>
                   <span>Go to home page</span>
                 </a>
@@ -103,7 +101,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Total recipes</h5>
-                      <span class="h2 font-weight-bold mb-0" style="color: white;">350,897</span>
+                      <span class="h2 font-weight-bold mb-0" style="color: white;">{{$recettes}}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
@@ -121,7 +119,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Total cookers</h5>
-                      <span class="h2 font-weight-bold mb-0" style="color: white;">2,356</span>
+                      <span class="h2 font-weight-bold mb-0" style="color: white;">{{$users}}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
@@ -139,7 +137,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Total categories</h5>
-                      <span class="h2 font-weight-bold mb-0" style="color: white;">924</span>
+                      <span class="h2 font-weight-bold mb-0" style="color: white;">{{$categories}}</span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
@@ -177,104 +175,6 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-xl-12">
-          <div class="card bg-default shadow">
-            <div class="card-header border-0 bg-default shadow">
-              <div class="row align-items-center ">
-                <div class="col ">
-                  <h3 class="mb-0" style="color: white;">Page visits</h3>
-                </div>
-              </div>
-            </div>
-            <div class="table-responsive">
-              <!-- Projects table -->
-              <table class="table align-items-center table-dark table-flush">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">Page name</th>
-                    <th scope="col">Visitors</th>
-                    <th scope="col">Unique users</th>
-                    <th scope="col">Bounce rate</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">
-                      /recettes.html/
-                    </th>
-                    <td>
-                      0
-                    </td>
-                    <td>
-                      0
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-up text-success mr-3"></i> 0%
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      /statistiques.html/
-                    </th>
-                    <td>
-                      0
-                    </td>
-                    <td>
-                      0
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-down text-warning mr-3"></i> 0%
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      /utilisateurs.html/
-                    </th>
-                    <td>
-                      0
-                    </td>
-                    <td>
-                      0
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-down text-warning mr-3"></i> 0%
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      /publications.html/
-                    </th>
-                    <td>
-                      0
-                    </td>
-                    <td>
-                      0
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-up text-success mr-3"></i> 0%
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      /profile.html/
-                    </th>
-                    <td>
-                      0
-                    </td>
-                    <td>
-                      0
-                    </td>
-                    <td>
-                      <i class="fas fa-arrow-down text-danger mr-3"></i> 0%
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-       </div>
-      </div>
+      
       
 @endsection

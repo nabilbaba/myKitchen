@@ -495,8 +495,10 @@ class ComposerStaticInit43be94b9327a316a9bc4ead055c25057
     public static $classMap = array (
         'App\\Admin' => __DIR__ . '/../..' . '/app/Admin.php',
         'App\\Categorie' => __DIR__ . '/../..' . '/app/Categorie.php',
+        'App\\Commentaire' => __DIR__ . '/../..' . '/app/Commentaire.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Cuisinier' => __DIR__ . '/../..' . '/app/Cuisinier.php',
+        'App\\Evaluation' => __DIR__ . '/../..' . '/app/Evaluation.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',

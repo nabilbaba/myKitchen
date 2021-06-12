@@ -46,7 +46,7 @@
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
                   <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="assetsCuisinier/img/theme/bootstrap.jpg">
+                    
                   </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">{{ $cuisinier->first_name }} {{$cuisinier->last_name}}</span>
@@ -62,7 +62,7 @@
                   <span>My profile</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="{{route('myKitchen')}}" class="dropdown-item">
+                <a href="{{route('myKitchen.allRecettes')}}" class="dropdown-item">
                   <i class="ni ni-bold-left"></i>
                   <span>Go to home page</span>
                 </a>
@@ -124,9 +124,16 @@
                   @foreach($recettes as $rec)
                   <tr id="sid{{$rec->id}}">
                     
-                    <td>
-                      <b>{{$rec->titre}}</b>
-                    </td>
+                   <th scope="row">
+                      <div class="media align-items-center">
+                        <a href="#" class="avatar rounded-circle mr-3">
+                          <img  src="{{ asset('storage/'.$rec->image)}}" alt="...">
+                        </a>
+                          <div class="media-body">
+                            <span class="name mb-0 text-sm">{{$rec->titre}}</span>
+                          </div>    
+                      </div>
+                    </th>
                     <td class="text-right">
                       <!--div class="dropdown" style="margin-left: 350px;">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

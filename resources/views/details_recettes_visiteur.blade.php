@@ -1,8 +1,7 @@
 @extends('layouts.app_details')
 
 @section('content')
-
-<section id="portfolio-details" class="portfolio-details">
+  <section id="portfolio-details" class="portfolio-details">
             <div class="container">
 
                 <div class="row gy-4">
@@ -10,10 +9,12 @@
                     <div class="col-lg-8">
                         <div class="portfolio-details-slider swiper-container">
                             <div class="swiper-wrapper align-items-center">
-
+                                
+                                @foreach($recette as $rec)
                                 <div class="swiper-slide">
-                                    <img src="assetsVisiteur/assets/img/RECIPES/RECIPES-1.jpg" class="img-fluid" alt="">
+                                    <img class="img-fluid" src="{{asset('storage/'.$rec->image)}}" alt="..." width="1000">
                                 </div>
+                                @endforeach
 
                             </div>
                             <div class="swiper-pagination">
@@ -23,13 +24,16 @@
 <br><br> <br> <br>
                         <div id="stars" class="comment1 p-3 mt-2 rating d-flex align-items-center justify-content-center w-auto">
                         <h4>EVALUATE THIS WORK</h4> <br>
-	                       <div class="stars">
-		                      <i class="fa fa-star gold" onClick="star(1)"></i>
-		                      <i class="fa fa-star"onClick="star(2)"></i>
-		                      <i class="fa fa-star"onClick="star(3)"></i>
-		                      <i class="fa fa-star"onClick="star(4)"></i>
-		                      <i class="fa fa-star" onClick="star(5)"></i>
-                        </div>
+                           <div class="stars" >
+                                <form id="eva-form">
+                                 @csrf
+                                  <i class="fa fa-star gold" onClick="star(1)" id="star1"></i>
+                                  <i class="fa fa-star"onClick="star(2)" id="star2"></i>
+                                  <i class="fa fa-star"onClick="star(3)" id="star3"></i>
+                                  <i class="fa fa-star"onClick="star(4)" id="star4"></i>
+                                  <i class="fa fa-star" onClick="star(5)" id="star5"></i>
+                                </form>
+                          </div>
 <br>                     <div id="send"class="text-center"><button type="button" class="btn btn-outline-light" onclick="evaluation()">SEND</button></div>
                        <!-- <textarea id="myTextarea" class="form-control"  rows="2" placeholder="what is your view?" required></textarea> -->
                        </div>
@@ -48,50 +52,73 @@
                        </div> -->
                 <!-- <div><span class="text3"></span><span class="thumbup"><i class="fa fa-thumbs-o-up"></i></span><span class="text4">3</span></div> -->
                         </div>
+                    @foreach($recette as $r)
                     <div class="col-lg-4">
                         <div class="portfolio-info">
                             <h2>REPICE INFORMATION</h2>
                             <ul>
-                                <li><strong>Category</strong>: Breakfast</li>
-                                <li><strong>name</strong>: Almond Poppyseed Pancakes </li>
-                                <li><strong>calories</strong>: 550</li>
-                                <li><strong>cock time</strong>: 20 min</li>
+                                @foreach($categories as $cat)
+                                <?php if ($r->categorie_id == $cat->id): ?>
+                                     <li><strong>Category</strong>: {{$cat->libelle}}</li>    
+                                <?php endif ?>
+                                
+                                @endforeach
+                                <li><strong>name</strong>: {{$r->titre}} </li>
+                                <li><strong>cock time</strong>: {{$r->temps_de_cuisson}}</li>
                             </ul>
                         </div>
                         <div class="portfolio-description">
                             <h2>INGREDIENTS</h2>
                             <ul>
-                                <li><strong>All-purpose flour</strong>: 2 cups</li>
-                                <li><strong>Baking powder</strong>: 2 tsp </li>
-                                <li><strong>Sugar</strong>: 1/3 cup</li>
-                                <li><strong>Salt</strong>: 1/2 tsp</li>
-                                <li><strong>Poppy seeds</strong>: 1/4 cup</li>
-                                <li><strong>Whole milk</strong>: 1/2 cups</li>
-                                <li><strong>Large eggs, yolks and whites separated</strong>: 3</li>
-                                <li><strong>Butter, divided</strong>: 8 tbsp</li>
-                                <li><strong>Almond extract</strong>: 1 tsp</li>
+                                @foreach($ingredients as $ing)
+                                <?php if ($ing->recette_id == $r->id): ?>
+                                   <li><strong>{{$ing->nom_produit}}</strong>: {{$ing->quantité}} {{$ing->unité}}</li>
+                                <?php endif ?>
+                                @endforeach
+                                
+                                
                             </ul>
                             <h2>METHOD</h2>
                             <p>
-                                Sift flour, baking powder, sugar and salt into a large bowl. Add poppy seeds to dry ingredients. Toss to distribute evenly. Separate the eggs into 2 separate bowls. Yolks in one bowl, whites in the other. Using an stand mixer fitted with a whisk attachment,
-                                whisk the milk, egg yolks, melted butter and almond extract to the mixer, whip until combined. Add the dry ingredients to the bowl and mix until just combined; batter will be slightly lumpy. Do not over mix. Place egg whites
-                                in a separate mixing bowl. Using an electric hand mixer, whisk until medium peaks form. Gently fold half of the egg whites into the batter with a rubber spatula. Gently fold in remaining whites. Heat a griddle until hot,
-                                at 350° F. Add a little of the remaining unmelted butter to hot griddle. Add a scant ½ cup pancake batter and let set. When bubbles begin to form, lift pancake once golden brown, flip over. Cook until golden brown on both
-                                sides. Serve immediately.
+                                {{$r->etapes}}
                             </p>
                         </div>
                     </div>
-
+                    @endforeach
                 </div>
                 <div class="bg bg-dark">
 <!-- Main Body -->
-<form onsubmit="return false">
 
-<section >
+<section class="mt-4">
     <div class="container">
         <div class="row">
             <div id="palestine" class="col-sm-5 col-md-6 col-12 pb-4" >
                 <h1>Comments</h1>
+
+                <div id="divid">
+                  @foreach($commentaires as $com)
+                  <?php if ($com->recette_id == $r->id): ?>
+                     <div class="comment text-justify darker mt-4 float-left ml-4 col-md-12">
+                        <img src="https://i.imgur.com/yTFUilP.jpg" class="rounded-circle " width="40" height="40" />
+                     
+                        <h4>{{$com->nom}}</h4>    ==>
+                            @php
+                              $dt = new DateTime();
+                              echo $dt->format('Y-m-d');                       
+                            @endphp
+                        
+                        <br>
+                        <p>{{$com->message}}</p>
+                         
+                     </div>
+                    
+ 
+                  <?php endif ?>
+                     
+
+                  @endforeach
+                </div>
+                
                 <!-- <div class="comment mt-4 text-justify float-left"> <img src="https://i.imgur.com/yTFUilP.jpg" alt="" class="rounded-circle" width="40" height="40">
                     <h4>Jhon Doe</h4> <span>- 20 October, 2018</span> <br>
                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
@@ -109,26 +136,62 @@
                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusamus numquam assumenda hic aliquam vero sequi velit molestias doloremque molestiae dicta?</p>
                 </div> -->
             </div>
-            <div  id="gaza" class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
-                <form id="algin-form" class="formmsg">
+            <div   class="col-lg-4 col-md-5 col-sm-4 offset-md-1 offset-sm-1 col-12 mt-4">
+                <form id="algin-form" >
+                    @csrf
+                    @foreach($recette as $rec)
+                     <input type="hidden" name="recette_id" id="recette_id" value="{{$rec->id}}">
+                    @endforeach
                     <div class="form-group1">
-                        <h4>Leave a comment</h4> <label for="message">Message</label> <textarea name="msg" id="msg" msg cols="30" rows="5" class="form-control" onchange="changemsg()" style="background-color: black;"></textarea>
+                        <h4>Leave a comment</h4> <label for="message">Message</label> <textarea name="msg" id="msg" msg cols="30" rows="5" class="form-control"  style="background-color: black;"></textarea>
                     </div>
-                    <div class="form-group1"> <label for="name">Name</label> <input type="text" name="name" id="fullname"  class="form-control" onchange="changename()"> </div>
+                    <div class="form-group1"> <label for="name">Name</label> <input type="text" name="name" id="name"  class="form-control" > </div>
                     <div class="form-group1"> <label for="email">Email</label> <input type="text" name="email" id="email" class="form-control"> </div>
                     <div class="form-group1">
                         <p class="text-secondary">If you have a <a href="#" class="alert-link">gravatar account</a> your address will be used to display your profile picture.</p>
                     </div>
                     <div class="form-inline"> <input type="checkbox" name="check" id="checkbx" class="mr-1"> <label for="subscribe">Subscribe me to the newlettter</label> </div>
-                    <div class="form-group1"> <button type="button" id="post" class="btn" onclick="comment22()">Post Comment</button> </div>
+                     <button type="submit"  id="post" class="btn btn-success">Post Comment</button>
                 </form>
             </div>
         </div>
     </div>
 </section>
-</form>
 </div>
             </div>
         </section>
 
 @endsection
+
+
+@push('scripts')
+  <script type="text/javascript">
+     
+     $(document).ready(function(){
+      $('#algin-form').submit(function(e){
+        e.preventDefault();
+        var data = $("#algin-form").serialize();
+        
+        $.ajax({
+           url:"{{route('commentaires.add')}}",
+           type:"POST",
+           dataType: "json", 
+           data: data,
+           
+           success:function(response){
+              $('#algin-form')[0].reset();
+              $('#divid').load(' #divid');
+              
+           },
+           error:function(error){
+            console.log(error);
+           },
+        });
+       });
+      });
+     
+    </script>
+
+    
+
+@endpush

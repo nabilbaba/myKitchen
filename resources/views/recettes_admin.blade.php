@@ -45,9 +45,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
-                  <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
-                  </span>
+                  
                   <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">{{$admin->first_name}} {{$admin->last_name}}</span>
                   </div>
@@ -62,7 +60,7 @@
                   <span>My profile</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="{{route('myKitchen')}}" class="dropdown-item">
+                <a href="{{route('myKitchen.allRecettes')}}" class="dropdown-item">
                   <i class="ni ni-bold-left"></i>
                   <span>Go to home page</span>
                 </a>
@@ -125,12 +123,12 @@
                 </thead>
                 <tbody class="list">
                   @foreach($recettes as $rec)
-                  <?php if ($rec->accepte == 1): ?>
+                  <?php if (($rec->accepte == 1) && ($rec->deleted_at == null)): ?>
                   <tr id="sid{{$rec->id}}">
                     <th scope="row">
                       <div class="media align-items-center">
-                        <a href="#" class="avatar rounded-circle mr-3">
-                          <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
+                        <a href="#" class="avatar  mr-3">
+                          <img class="img-fluid" src="{{asset('storage/'.$rec->image)}}" alt="...">
                         </a>
                           <div class="media-body">
                             <span class="name mb-0 text-sm" id="titre">{{$rec->titre}}</span>
@@ -192,7 +190,14 @@
               </div>
               <div class="modal-body" >
                 <div class="container-fluid">
-                  <center><h2>{{$r->titre}}</h2></center>
+                  <center>
+                  <img
+                      src="{{asset('storage/'.$rec->image)}}" alt="..."
+                      class="img-fluid rounded"
+                      width="500"
+                    />
+                  </center>
+                  <center><h2 class="mt-4">{{$r->titre}}</h2></center>
                   <h3 class="mt-5">Ingredients </h3>
                     <div class="row">
                       @foreach($ingredients as $ingr)

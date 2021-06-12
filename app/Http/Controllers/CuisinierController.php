@@ -11,8 +11,10 @@ use Auth;
 use App\Ingredient;
 use App\Categorie;
 use DB;
+use App\User;
 use Response;
 use Validator;
+use Redirect;
 
 class CuisinierController extends Controller
 {
@@ -24,6 +26,32 @@ class CuisinierController extends Controller
     public function profile_cuisinier(){
     	$cuisinier=Cuisinier::find(Auth::user()->id);
         return view('profile_cuisinier',['cuisinier'=>$cuisinier]);
+    }
+    public function editProfile($id){
+      $cuisinier = Cuisinier::find($id);
+
+      return response()->json(['cuisinier' => $cuisinier]);
+    }
+
+    public function updateProfile(Request $request){
+        
+       $cuisinier=Cuisinier::find(Auth::user()->id);
+        $user = Auth::user();
+        if($cuisinier->user_id == $user->id){
+          $user->num = $request->num;
+          $user->email = $request->email;
+        }
+        $cuisinier->num = $request->num;
+        $cuisinier->email = $request->email;
+        $cuisinier->first_name = $request->first_name;
+        $cuisinier->last_name = $request->last_name;
+        $cuisinier->date_of_birth = $request->date_of_birth;
+        $cuisinier->code_postal = $request->code_postal;
+        $cuisinier->adresse = $request->adresse;
+        $cuisinier->save();
+        $user->save(); 
+        return redirect('profileC');
+
     }
 
     public function getRecipes(){
@@ -83,7 +111,7 @@ class CuisinierController extends Controller
         {
         	return Response()->json(['errors' => $error->errors()->all()]);
         }      
-        
+            
         $recette = new Recette();
         $recette->titre = $request->titre;
         $recette->temps_de_preparation = $request->temps_prepar;
@@ -92,10 +120,16 @@ class CuisinierController extends Controller
         $recette->niveau = $request->niveau;
         $recette->cuisinier_id = $request->cuisinier_id;
         $recette->categorie_id = $request->categorie_id;
-        $recette->ingredients =  $request->nom;
+        
+         
+        if($request->hasFile('image')){ 
+          $path = $request->image->store('recettes_image');
+        }
+        $recette->image = $path;
+        
         $recette->save();
         
-        return Response()->json($recette); 
+        return redirect('recettesC'); 
       
     }
     
@@ -170,6 +204,7 @@ class CuisinierController extends Controller
         $recette->niveau = $request->niveau;
         $recette->cuisinier_id = $request->cuisinier_id;
         $recette->categorie_id = $request->categorie_id;
+
         $recette->save();
         
         return Response()->json($recette);

@@ -26,6 +26,30 @@ class AdminController extends Controller
     	$admin=Admin::find(Auth::user()->id);
         return view('profile_admin',['admin'=>$admin]);
     }
+    public function editProfile($id){
+      $admin = Admin::find($id);
+      return response()->json(['admin' => $admin]);
+    }
+
+    public function updateProfile(Request $request, $id){
+        $admin = Admin::find($id);
+        $user = User::find($id);
+        if($admin->user_id == $user->id){
+          $user->num = $request->num;
+          $user->email = $request->email;
+        }
+        $admin->num = $request->num;
+        $admin->email = $request->email;
+        $admin->first_name = $request->first_name;
+        $admin->last_name = $request->last_name;
+        $admin->date_of_birth = $request->date_of_birth;
+        $admin->code_postal = $request->code_postal;
+        $admin->adresse = $request->adresse;
+        $admin->save();
+        $user->save(); 
+        return redirect('profileA');
+
+    }
 
     /*public function updateProfile(Request $request){
        
@@ -202,8 +226,21 @@ class AdminController extends Controller
         $admin = Admin::find(Auth::user()->id);
         $search = $request->get('sear');
         $recettes = Recette::all();
-        $cuisinier =\DB::table('cuisiniers')->where([['first_name', 'like', '%'.$search.'%'],['deleted_at',null]])->orWhere([['last_name', 'like', '%'.$search.'%'],['deleted_at',null]])->get();
+        $cuisinier =\DB::table('cuisiniers')->where([['first_name', 'like', '%'.$search.'%'],['deleted_at',null]])->orWhere([['last_name', 'like', '%'.$search.'%'],['deleted_at',null]])->orWhere([['adresse', 'like', '%'.$search.'%'],['deleted_at',null]])->orWhere([['email', 'like', '%'.$search.'%'],['deleted_at',null]])->get();
         
      return view('searchUser_admin',compact('recettes','admin','cuisinier'))->with('no', 1);
+     }
+
+     public function getIcons(){
+         $admin=Admin::find(Auth::user()->id);
+
+        return view('icons_admin',compact('admin'));
+     }
+     public function getStatistics(){
+         $admin=Admin::find(Auth::user()->id);
+         $users = \DB::table('cuisiniers')->where('deleted_at',null)->count();
+         $recettes = \DB::table('recettes')->where('accepte',1)->count();
+         $categories = \DB::table('categories')->count();
+         return view ('statistiques_admin',compact('admin','users','recettes','categories'));         
      }
 }

@@ -40,23 +40,25 @@
 <body>
 
     <!-- ======= Top Bar ======= -->
+    @foreach($user as $u)
     <section id="topbar" class="fixed-top d-flex align-items-center">
         <div class="container d-flex justify-content-center justify-content-md-between">
             <div class="contact-info d-flex align-items-center">
-                <i class="bi bi-envelope d-flex align-items-center"><a href="mailto:contact@example.com">mykitchen@gmail.com</a>
+                <i class="bi bi-envelope d-flex align-items-center"><a href="http://www.gmail.com">{{$u->email}}</a>
                 </i>
                 <i class="bi bi-phone d-flex align-items-center ms-4">
-                    <span>+213 559 585488</span>
+                    <span>{{$u->num}}</span>
                 </i>
             </div>
             <div class="social-links d-none d-md-flex">
-                <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                <a href="http://www.twitter.com" class="twitter"><i class="bi bi-twitter"></i></a>
+                <a href="http://www.facebook.com" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="http://www.instagram.com" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="http://www.linkdein.com" class="linkedin"><i class="bi bi-linkedin"></i></a>
             </div>
         </div>
     </section>
+    @endforeach
 
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top d-flex align-items-center">
@@ -67,6 +69,19 @@
                 <!-- Uncomment below if you prefer to use an image logo -->
                 <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
             </div>
+            <form action="{{ route('recetteV.search') }}" method="GET" class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
+            <div class="form-group mb-0">
+              <div class="input-group input-group-alternative input-group-merge">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-search"></i></span>
+                </div>
+                <input class="form-control" placeholder="Search" type="text" name="search2" id="search2">
+              </div>
+            </div>
+            <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
+              <span aria-hidden="true"></span>
+            </button>
+          </form>
 
             <nav id="navbar" class="navbar">
                 <ul>
@@ -244,52 +259,22 @@
             <div class="container position-relative">
 
                 <div class="testimonials-slider swiper-container" data-aos="fade-up" data-aos-delay="100">
+                    @foreach($chef as $ce)
                     <div class="swiper-wrapper">
 
                         <div class="swiper-slide">
                             <div class="testimonial-item">
                                 <img src="assetsVisiteur/assets/img/testimonials/gordon-ramsay-kitchen-nightmares-amy-s-baking-company-chef-leadership-gordon-ramsay-a8f62a37fcb48fcd3fe052a968f25547.jpg" class="testimonial-img" alt="">
-                                <h3>Gordon Ramsay</h3>
+                                <h3>{{$ce->first_name}} {{$ce->last_name}}</h3>
                                 <h4>Chef</h4>
                                 <p>
-                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i> There's no bigger pain anywhere in the world than a vegetarian. Initially let your food do the talking. You'll be surprised how far you go in a short period of time.
-                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>{{$ce->email}}<i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
                         </div>
                         <!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="assetsVisiteur/assets/img/testimonials/922ff8c59f83ac2d02575c7b1133e4fc98-22-thomaskeller.rsquare.w700.jpg" class="testimonial-img" alt="">
-                                <h3>Thomas Keller</h3>
-                                <h4>Chef</h4>
-                                <p>
-                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i>A recipe has no soul. You, as the cook, must bring soul to the recipe.
-                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div>
-                        <!-- End testimonial item -->
-
-                        <div class="swiper-slide">
-                            <div class="testimonial-item">
-                                <img src="assetsVisiteur/assets/img/testimonials/Paul-Bocuse.jpg" class="testimonial-img" alt="">
-                                <h3>Paul Bocuse</h3>
-                                <h4>Chef</h4>
-                                <p>
-                                    <i class="bx bxs-quote-alt-left quote-icon-left"></i> If an architect makes a mistake, he grows ivy to cover it. If a doctor makes a mistake, he covers it with soil. If a cook makes a mistake, he covers it with some
-                                    sauce and says it is a new recipe.
-                                    <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                                </p>
-                            </div>
-                        </div>
-                        <!-- End testimonial item -->
-
-                        <!-- End testimonial item -->
-                        <!-- End testimonial item -->
-
                     </div>
+                    @endforeach
                     <div class="swiper-pagination"></div>
                 </div>
 
@@ -366,40 +351,26 @@
                 </div>
 
                 <div class="row">
-
-                    <div class="col-lg-6">
+                    @foreach($team as $te)
+                    <div class="col-lg-12">
                         <div class="member d-flex align-items-start">
                             <div class="pic"><img src="" class="img-fluid" alt=""></div>
-                            <div class="member-info">
-                                <h4>BELASKRI MONCEF</h4>
-                                <span>UX/UI DESIGNER</span>
-                                <p>designer of user interfaces for machines and software</p>
-                                <div class="social">
-                                    <a href="https://twitter.com/BelaskriMoncef"><i class="ri-twitter-fill"></i></a>
-                                    <a href="https://web.facebook.com/moncef.smaili/"><i class="ri-facebook-fill"></i></a>
-                                    <a href="https://www.instagram.com/_____moncef/?hl=fr"><i class="ri-instagram-fill"></i></a>
-                                    <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                            <center>
+                                <div class="member-info">
+                                    <h4>{{$te->first_name}} {{$te->last_name}}</h4>
+                                    <span>UX/UI DESIGNER and DEV</span>
+                                    <p>designer of user interfaces for machines and software</p>
+                                    <div class="social">
+                                        <a href="https://twitter.com/BelaskriMoncef"><i class="ri-twitter-fill"></i></a>
+                                        <a href="https://web.facebook.com/moncef.smaili/"><i class="ri-facebook-fill"></i></a>
+                                        <a href="https://www.instagram.com/_____moncef/?hl=fr"><i class="ri-instagram-fill"></i></a>
+                                        <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+                                    </div>
                                 </div>
-                            </div>
+                           </center>
                         </div>
                     </div>
-
-                    <div class="col-lg-6 mt-4 mt-lg-0">
-                        <div class="member d-flex align-items-start">
-                            <div class="pic"><img src="" class="img-fluid" alt=""></div>
-                            <div class="member-info">
-                                <h4>BABA AHMED NABIL</h4>
-                                <span>developer</span>
-                                <p>web application devloper for machines and software</p>
-                                <div class="social">
-                                    <a href=""><i class="ri-twitter-fill"></i></a>
-                                    <a href="https://www.facebook.com/Nabil.Baba.13/"><i class="ri-facebook-fill"></i></a>
-                                    <a href="https://www.instagram.com/nabil_baba_ahmed/"><i class="ri-instagram-fill"></i></a>
-                                    <a href=""><i class="ri-linkedin-box-fill"></i> </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
 
                     <!-- <div class="col-lg-6 mt-4">
                         <div class="member d-flex align-items-start">
@@ -463,7 +434,7 @@
             </div>
 
             <div class="container">
-
+                @foreach($user as $u)
                 <div class="info-wrap mt-5">
                     <div class="row">
                         <div class="col-lg-4 info">
@@ -474,19 +445,22 @@
 
                         <div class="col-lg-4 info mt-4 mt-lg-0">
                             <i class="ri-mail-line"></i>
-                            <h4>Email:</h4>
-                            <p>infoMyKitchen@gmail.com<br>contactMyKitchen@gmail.com</p>
+                            
+                                <h4>Email:</h4>
+                                <p>{{$u->email}}</p>
+                            
                         </div>
 
                         <div class="col-lg-4 info mt-4 mt-lg-0">
                             <i class="ri-phone-line"></i>
                             <h4>Call:</h4>
-                            <p>+213 5589 55488 51<br>+213 5589 22475 14</p>
+                            <p >{{$u->num}}</p>
                         </div>
                     </div>
                 </div>
+                @endforeach
 
-                <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                <!--form action="forms/contact.php" method="post" role="form" class="php-email-form">
                     <div class="row">
                         <div class="col-md-6 form-group">
                             <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
@@ -507,7 +481,7 @@
                         <div class="sent-message">Your message has been sent. Thank you!</div>
                     </div>
                     <div class="text-center"><button type="submit">Send Message</button></div>
-                </form>
+                </form-->
 
             </div>
         </section>
@@ -517,6 +491,7 @@
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
+    @foreach($user as $u)
     <footer id="footer">
         <div class="footer-top">
             <div class="container">
@@ -527,8 +502,8 @@
                             <h3>MyKitchen</h3>
                             <p>
                                 Universitaire Abou Bakr Belkaid Tlemcen <br>TLEMCEN, ALGERIA<br><br>
-                                <strong>Phone:</strong>+213 5589 22475 14<br>
-                                <strong>Email:</strong> infoMyKitchen@gmail.com<br>
+                                <strong>Phone:</strong>{{$u->num}}<br>
+                                <strong>Email:</strong> {{$u->email}}<br>
                             </p>
                             <div class="social-links mt-3">
                                 <a href="https://twitter.com/BelaskriMoncef" class="twitter"><i class="bx bxl-twitter"></i></a>
@@ -586,6 +561,7 @@
             </div>
         </div>
     </footer>
+    @endforeach
     <!-- End Footer -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>

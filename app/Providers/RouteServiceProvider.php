@@ -24,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
     public const HOME = '/myKitchen';
     public const CUISINIER = '/profileC';
     public const ADMIN = '/statistiques';
-    
+    public const NOT_FOUND = '/page_not_found';
     /**
      * Define your route model bindings, pattern filters, etc.
      *

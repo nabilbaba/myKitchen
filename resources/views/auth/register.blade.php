@@ -11,7 +11,7 @@
                  @csrf
 
                     <span class="login100-form-title p-b-26">
-                        <h1>My<a href="{{route('myKitchen')}}"><span>Kitchen</span></a>
+                        <a href="{{route('myKitchen.visiteur')}}"><b style="color: black;">My</b><span> Kitchen</span></a>
                     </h1>
                     </span>
                     <span class="login100-form-title p-b-48">

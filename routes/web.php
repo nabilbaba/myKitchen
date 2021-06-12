@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('myKitchen_visiteur');
-})->name('myKitchen');
+
 
 Route::get('/page_not_found', function () {
     return view('page_not_found');
@@ -23,12 +21,17 @@ Route::get('/page_not_found', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/myKitchen','HomeController@index')->name('myKitchen.visiteur');
+Route::get('/','HomeController@index2')->name('myKitchen.allRecettes');
+Route::post('/recettesDetails-addCommentaires','HomeController@addCommentaires')->name('commentaires.add');
+Route::get('/recettesDetails','HomeController@getDetailleRecette')->name('recettesDetails');
 
-
-
+Route::get('/search-recetteV','HomeController@searchRecette')->name('recetteV.search');
+/*Route::post('/recettesDetails-addEvaluation','HomeController@addEvaluations')->name('evaluations.add');*/
 //Route::put('/updateprofile/{id}','AdminController@updateProfile')->name('updateprofile');
 Route::get('/profileA','AdminController@profile_admin')->name('profileA');
+Route::get('/profileA/{id}/edit','AdminController@editProfile')->name('profileA.edit');
+Route::put('/profileA/{id}','AdminController@updateProfile');
 Route::get('/catégories','AdminController@getCategorie')->name('catégories');
 Route::get('/cuisiniers','AdminController@getCooker')->name('cuisiniers');
 Route::post('/cuisiniers','AdminController@getDetailsCuis')->name('cuisinier.getbyid');
@@ -43,17 +46,13 @@ Route::get('getCat','AdminController@getCategoriepagination')->name('catégories
 Route::delete('/refuse-recipe/{id}','AdminController@refuseRecipe')->name('recipe.refuse');
 Route::delete('/accepte-recipe/{id}','AdminController@validerRecipe')->name('recipe.accepte');
 Route::delete('/delete-line/{id}','AdminController@deleteLine')->name('line.delete');
-Route::get('/statistiques', function () {
-    return view('statistiques_admin');
-})->name('statistiques');
+Route::get('/statistiques', 'AdminController@getStatistics')->name('statistiques');
 
 Route::get('/publications', 'AdminController@accpterRecipe')->name('publications');
 Route::delete('/delete-recipeA/{id}','AdminController@deleteRecipeAdmin')->name('recipe.deleteA');
 Route::get('/get-recipeDate','AdminController@getRecettesDate')->name('recettes.getDate');
 
-Route::get('/icons', function () {
-    return view('icons_admin');    
-})->name('icons');
+Route::get('/iconsA', 'AdminController@getIcons')->name('iconsA');
 
 
 
@@ -66,6 +65,9 @@ Route::get('/search-cuisinier','AdminController@searchUser')->name('user.search'
 //=======================================//
 Route::get('/profileC','CuisinierController@profile_cuisinier')->name('profileC');
 Route::get('/recettesC','CuisinierController@getRecipes')->name('recettesC');
+Route::get('/profileC/{id}/edit','CuisinierController@editProfile')->name('profileC.edit');
+Route::put('/profileC-update/','CuisinierController@updateProfile')->name('profileC.update');
+
 Route::get('/ingredientsC','CuisinierController@getIngredients')->name('ingredientsC');
 Route::post('/add-recette','CuisinierController@addRecette')->name('recette.add');
 Route::get('getId/{id}', 'CuisinierController@getID');
@@ -85,9 +87,7 @@ Route::get('/iconsC', 'CuisinierController@getIcons')->name('iconsC');
 
 //======================================//
 
-Route::get('/recettesDetails', function () {
-    return view('details_recettes_visiteur');
-})->name('recettesDetails');
+
 
 
 
