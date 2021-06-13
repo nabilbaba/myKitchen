@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+      
+        
 
         <section id="RECIPES" class="RECIPES">
             <div class="container">
@@ -14,24 +16,27 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <ul id="RECIPES-flters">
-                            <button class="btn btn-outline-danger"><a href="{{route('myKitchen.allRecettes')}}"><b style="color: black;">ALL</b></a></button>
-
+                            <button class="btn btn-outline-danger active" ><a href="#"><b style="color: black;">ALL</b></a></button>
+                             
                              @foreach($categories as $cat)
-
-                             <?php
+                              
+                              <?php
 
                                  $stripeCat='';
 
                                  $urlAcctuiel = Route::getCurrentRoute()->uri();
 
-                                 if($urlAcctuiel == "{{route('myKitchen.visiteur',['id' => $cat->id])}}"){
+                                 if($urlAcctuiel == $cat->id){
                                      $stripeCat='active';
                                  }
 
                               ?> 
-                                  <button class="btn btn-outline-danger <?php echo $stripeCat ?>"><a href="{{route('myKitchen.visiteur',['id' => $cat->id])}}"><b style="color: black;">{{$cat->libelle}}</b></a></button>     
+                             
+                               <button class="btn btn-outline-danger <?php echo $stripeCat ?>" id="RECIPES"><a href="{{route('myKitchen.visiteur',['id' => $cat->id])}}"><b style="color: black;">{{$cat->libelle}}</b></a></button> 
                                    
                             @endforeach
+
+
 
                             <!--li data-filter=".filter-Dinner">Dinner</li>
                             <li data-filter=".filter-Dessert">Dessert</li>
@@ -57,10 +62,10 @@
                 <div class="row RECIPES-container">
                     <ul>
                         
-                        @foreach($recettes as $rec)
+                        @foreach($recettesAll as $rec)
                         <div id="div1" class="col-lg-4 col-md-6 RECIPES-item">
                             <div class="RECIPES-wrap">
-                                <img class="img-fluid" src="{{asset('storage/'.$rec->image)}}" alt="...">
+                                 <img class="img-fluid" src="{{asset('storage/'.$rec->image)}}" alt="...">
                                 <div class="RECIPES-info">
                                     <h4>{{$rec->titre}}</h4>
                                     @foreach($categories as $cat)

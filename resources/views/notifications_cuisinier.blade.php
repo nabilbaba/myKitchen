@@ -45,9 +45,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
-                  <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="assetsAdmin/img/theme/bootstrap.jpg">
-                  </span>
+                  
                   <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">{{$cuisinier->first_name}} {{$cuisinier->last_name}}</span>
                   </div>
@@ -62,7 +60,7 @@
                   <span>My profile</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="{{route('myKitchen')}}" class="dropdown-item">
+                <a href="{{route('myKitchen.allRecettes')}}" class="dropdown-item">
                   <i class="ni ni-bold-left"></i>
                   <span>Go to home page</span>
                 </a>

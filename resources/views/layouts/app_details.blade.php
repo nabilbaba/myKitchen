@@ -26,6 +26,8 @@
     <link href="assetsVisiteur/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+  </script>
     <!-- Template Main CSS File -->
     <link href="assetsVisiteur/assets/css/style.css" rel="stylesheet">
 
@@ -67,8 +69,29 @@
 
             <nav id="navbar" class="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto " href="{{route('recettesDetails')}}">Home</a></li>
+                    <li><a class="nav-link scrollto " href="{{route('myKitchen.allRecettes')}}">Home</a></li>
+                    @guest
                     <li><a class="nav-link scrollto" href="{{route('login')}}">Login</a></li>
+                    @else
+                    @if(Auth::user()->type_compte == 'c')
+                    <li><a class="nav-link scrollto" href="{{route('profileC')}}">My space</a></li>
+                    <li><a class="nav-link scrollto" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}"method="POST" style="display: none;">
+                        @csrf
+                        </form> 
+                    </li>
+                    
+                    
+                    @elseif(Auth::user()->type_compte == 'a')
+                    <li><a class="nav-link scrollto" href="{{route('statistiques')}}">My space</a></li>
+                    <li><a class="nav-link scrollto" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">logout</a>
+                        <form id="logout-form" action="{{ route('logout') }}"method="POST" style="display: none;">
+                        @csrf
+                        </form> 
+                    </li>
+                    @endif
+                    
+                    @endguest
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
@@ -174,7 +197,7 @@
     <!-- End Footer -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
+      @stack('scripts')
     <!-- Vendor JS Files -->
     <script src="assetsVisiteur/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assetsVisiteur/assets/vendor/glightbox/js/glightbox.min.js"></script>

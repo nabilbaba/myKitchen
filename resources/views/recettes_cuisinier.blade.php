@@ -47,9 +47,6 @@
             <li class="nav-item dropdown">
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
-                  <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="assetsCuisinier/img/theme/bootstrap.jpg">
-                  </span>
                   <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">{{ $cuisinier->first_name }} {{$cuisinier->last_name}}</span>
                   </div>
@@ -64,7 +61,7 @@
                   <span>My profile</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="{{route('myKitchen')}}" class="dropdown-item">
+                <a href="{{route('myKitchen.allRecettes')}}" class="dropdown-item">
                   <i class="ni ni-bold-left"></i>
                   <span>Go to home page</span>
                 </a>
@@ -126,9 +123,16 @@
                   @foreach($recettes as $rec)
                   <tr id="sid{{$rec->id}}">
                     
-                    <td>
-                      <b>{{$rec->titre}}</b>
-                    </td>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <a href="#" class="avatar mr-3">
+                          <img  src="{{ asset('storage/'.$rec->image)}}" alt="...">
+                        </a>
+                          <div class="media-body">
+                            <span class="name mb-0 text-sm">{{$rec->titre}}</span>
+                          </div>    
+                      </div>
+                    </th>
                     <td class="text-right">
                       <!--div class="dropdown" style="margin-left: 350px;">
                         <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -176,13 +180,20 @@
               </div>
               <div class="modal-body">
                
-                <form id="recipeForm" enctype="multipart/form-data">
+                <form action="{{route('recette.add')}}" id="recipeForm" enctype="multipart/form-data" method="POST">
                   @csrf
                   <input type="hidden" value="{{$cuisinier->id}}" name="cuisinier_id" id="cuisinier_id"/>
                   <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6" >
                       <label for="titre">recipe title</label>
-                      <input type="text" name="titre" id="titre" class="form-control" placeholder="title..."  />
+                      <input type="text" name="titre" id="titre" class="form-control  @error('titre') is-invalid @enderror" placeholder="title..." value="{{ old('titre') }}" />
+                       
+                      @error('titre')
+                               <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                               </span>
+                      @enderror
+
                     </div>
                     <div class="form-group col-md-6">
                       <label for="categorie_id">category</label> 
@@ -195,19 +206,34 @@
                     </div>
                   </div>
                   <div class="row mt-3">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6" >
                       <label for="temps_prepar">preparation time</label>
-                      <input type="text" name="temps_prepar" id="temps_prepar" class="form-control" placeholder="preparation time..."/>
+                      <input type="text" name="temps_prepar" id="temps_prepar" class="form-control @error('temps_prepar') is-invalid @enderror" placeholder="preparation time..." value="{{ old('temps_prepar') }}"/>
+                       
+                       @error('temps_prepar')
+                               <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                               </span>
+                      @enderror
+
                     </div>
                     <div class="form-group col-md-6">
                       <label for="temps_cuiss">cooking time</label>
-                      <input type="text" name="temps_cuiss" id="temps_cuiss" class="form-control" placeholder="cooking time..."/>
+                      <input type="text" name="temps_cuiss" id="temps_cuiss" class="form-control  @error('temps_cuiss') is-invalid @enderror" placeholder="cooking time..." value="{{ old('temps_cuiss') }}" />
+                       
+                        @error('temps_cuiss')
+                               <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                               </span>
+                      @enderror
+
+ 
                     </div>
                   </div>
                   <div class="row mt-3">
                     <div class="form-group col-md-6">
                       <label for="image_profile">profile picture</label>
-                      <input type="file" name="image_profile" id="image_profile" class="form-control"/>
+                      <input type="file" name="image" id="image" class="form-control"/>
                     </div>
                     <!--div class="form-group col-md-6">
                       <label for="images">recipe pictures</label>
@@ -217,21 +243,33 @@
                   <div class="row mt-3">
                     <div class="form-group col-md-12">
                       <label for="etapes">steps</label>
-                      <textarea  name="etapes" id="etapes" class="form-control"  placeholder="steps..."></textarea>   
+                      <textarea  name="etapes" id="etapes" class="form-control @error('etapes') is-invalid @enderror"  placeholder="steps...">{{ old ('etapes') }}</textarea>
+                       
+                        @error('etapes')
+                               <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                               </span>
+                        @enderror 
                     </div>
                   </div>
                   <div class="row mt-3">
                     <div class="form-group col-md-12 ">
                       <label for="niveau">niveau</label>
-                      <select  class="form-control" id="niveau" name="niveau"> 
+                      <select  class="form-control @error('niveau') is-invalid @enderror" id="niveau" name="niveau"> 
                            <option value="" hidden="hidden" selected>Select a level</option> 
                            <option value="beginner">beginner</option>
                            <option value="medium">medium</option>
                            <option value="expert">expert</option>
-                      </select>   
+                      </select>
+
+                      @error('niveau')
+                               <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                               </span>
+                        @enderror 
                     </div>
                   </div>
-                  <button  class="btn btn-success btn-sm mt-4">Save</button>
+                  <button  class="btn btn-success btn-sm mt-4 " type="submit">Save</button>
                   <button  class="btn btn-warning btn-sm float-right mt-4" data-bs-dismiss="modal" >Cancel</button>
                    <span id="recipe_result" ></span>
                 </form>
@@ -284,7 +322,7 @@
                   <div class="row mt-3">
                     <div class="form-group col-md-6">
                       <label for="image_profileEdit">profile picture</label>
-                      <input type="file" name="image_profileEdit" id="image_profileEdit" class="form-control"/>
+                      <input type="file" name="image_Edit" id="image_profileEdit" class="form-control"/>
                     </div>
                     <!--div class="form-group col-md-6">
                       <label for="images">recipe pictures</label>
@@ -331,7 +369,14 @@
               </div>
               <div class="modal-body" >
                 <div class="container-fluid">
-                  <center><h2>{{$r->titre}}</h2></center>
+                  <center>
+                  <img
+                      src="{{asset('storage/'.$rec->image)}}" alt="..."
+                      class="img-fluid rounded"
+                      width="500"
+                    />
+                  </center>
+                  <center><h2 class="mt-4">{{$r->titre}}</h2></center>
                   <h3 class="mt-5">Ingredients </h3>
                     <div class="row">
                       @foreach($ingredients as $ingr)
@@ -480,59 +525,7 @@
        }
      });
     }
-     $(document).ready(function(){
-      $('#recipeForm').submit(function(e){
-        e.preventDefault();
-        var data = $("#recipeForm").serialize();
-        /*var formData = new FormData();
-        if($('#image_profile')[0].files.length > 0){
-          for (var i = 0;i < $('#image_profile')[0].files.length; i++)
-            formData.append('file[]', $('#image_profile')[0].files[i]);
-        }
-        
-        formData.append('titre', $('#titre').val());
-        formData.append('cuisinier_id', $('#cuisinier_id').val());
-        formData.append('categorie_id', $('#categorie_id').val());
-        formData.append('temps_prepar', $('#temps_prepar').val());
-        formData.append('temps_cuiss', $('#temps_cuiss').val());
-        formData.append('etapes', $('#etapes').val());
-        formData.append('niveau', $('#niveau').val());
-        formData.append('_token', $("input[name=_token]").val());*/
-        $.ajax({
-           url:"{{route('recette.add')}}",
-           type:"POST",
-           dataType: "json", 
-           data: data,
-           success:function(response){
-              console.log(response)
-              var html = '';
-              if(response.errors){
-
-                html = '<div class="alert alert-danger mt-3">';
-                for(var count = 0; count < response.errors.length; count++)
-                {
-                  html += '<p>' + response.errors[count] + '</p>';
-                }
-                html += '</div>';
-                
-
-              }
-              else{
-                $('.modal').modal('hide');
-                $('#recipeForm')[0].reset();
-
-                $('#divid').load(' #divid');
-                
-                
-              }
-              $('#recipe_result').html(html);
-
-              
-           },
-           
-        });
-       });
-      });
+     
      
     </script>
 
@@ -567,6 +560,7 @@
            $('#categorie_idEdit').val(recipe.categorie_id);
            $('#temps_preparEdit').val(recipe.temps_de_preparation);
            $('#temps_cuissEdit').val(recipe.temps_de_cuisson);
+           $('#image_Edit').val(recipe.temps_de_cuisson);
            $('#etapesEdit').val(recipe.etapes);
            $('#niveauEdit').val(recipe.niveau);
            //$('#recipeEditModal').modal('toggle');
@@ -579,6 +573,7 @@
         var titre = $('#titreEdit').val();
         var etapes = $('#etapesEdit').val();
         var temps_prepar = $('#temps_preparEdit').val();
+        var image = $('#image_Edit').val();
         var temps_cuiss = $('#temps_cuissEdit').val();
         var categorie_id = $('#categorie_idEdit').val();
         var niveau = $('#niveauEdit').val();
@@ -594,6 +589,7 @@
               titre:titre,
               etapes:etapes,
               temps_prepar:temps_prepar,
+              image:image,
               temps_cuiss:temps_cuiss,
               categorie_id:categorie_id,
               niveau:niveau,

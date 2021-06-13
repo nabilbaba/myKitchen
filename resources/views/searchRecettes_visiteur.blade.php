@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+      
+        
 
         <section id="RECIPES" class="RECIPES">
             <div class="container">
@@ -11,56 +13,16 @@
                     <p>Find and share everyday cooking inspiration on AllRECIPES. Discover RECIPES, cooks, videos, and how-tos based on the food you love and the friends you follow.</p>
                 </div>
 
-                <div class="row">
-                    <div class="col-lg-12">
-                        <ul id="RECIPES-flters">
-                            <button class="btn btn-outline-danger"><a href="{{route('myKitchen.allRecettes')}}"><b style="color: black;">ALL</b></a></button>
-
-                             @foreach($categories as $cat)
-
-                             <?php
-
-                                 $stripeCat='';
-
-                                 $urlAcctuiel = Route::getCurrentRoute()->uri();
-
-                                 if($urlAcctuiel == "{{route('myKitchen.visiteur',['id' => $cat->id])}}"){
-                                     $stripeCat='active';
-                                 }
-
-                              ?> 
-                                  <button class="btn btn-outline-danger <?php echo $stripeCat ?>"><a href="{{route('myKitchen.visiteur',['id' => $cat->id])}}"><b style="color: black;">{{$cat->libelle}}</b></a></button>     
-                                   
-                            @endforeach
-
-                            <!--li data-filter=".filter-Dinner">Dinner</li>
-                            <li data-filter=".filter-Dessert">Dessert</li>
-                            <li data-filter=".filter-Drinks">Drinks</li>
-                            <li data-filter=".filter-Lunch">Lunch</li>
-                            <li data-filter=".filter-Pizza">Pizza</li>
-                            <li data-filter=".filter-Salads">Salads</li-->
-
-
-                        </ul>
-                    </div>
-                    <!-- <div class="container h-100">
-                        <div class="d-flex justify-content-center h-100">
-                            <div class="searchbar">
-                                <input id="myInput" class="search_input" type="text" name="" placeholder="Search...">
-                                <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
+                
 
                 <br>
                 <div class="row RECIPES-container">
                     <ul>
                         
-                        @foreach($recettes as $rec)
+                        @foreach($recettes_search as $rec)
                         <div id="div1" class="col-lg-4 col-md-6 RECIPES-item">
                             <div class="RECIPES-wrap">
-                                <img class="img-fluid" src="{{asset('storage/'.$rec->image)}}" alt="...">
+                                 <img class="img-fluid" src="{{asset('storage/'.$rec->image)}}" alt="...">
                                 <div class="RECIPES-info">
                                     <h4>{{$rec->titre}}</h4>
                                     @foreach($categories as $cat)

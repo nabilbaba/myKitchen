@@ -38,7 +38,7 @@
          else if($urlAcctuiel == 'publications'){
              $stripePubs='active';
          }
-         else if($urlAcctuiel == 'icons'){
+         else if($urlAcctuiel == 'iconsA'){
              $stripeIcons='active';
          }
          else if($urlAcctuiel == 'profileA'){
@@ -92,7 +92,7 @@
               </a>
             </li>
             <li class="nav-item" style="margin-top: 30px;">
-              <a class="nav-link <?php echo $stripeIcons ?>" href="{{route('icons')}}">
+              <a class="nav-link <?php echo $stripeIcons ?>" href="{{route('iconsA')}}">
                 <i class="ni ni-planet text-orange"></i>
                 <b><span class="nav-link-text">Icons</span></b>
               </a>
@@ -140,13 +140,13 @@
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-lg-6">
             <div class="copyright text-center  text-lg-left  text-muted">
-              &copy; 2020 <a href="{{route('myKitchen')}}" class="font-weight-bold ml-1" target="_blank">myKitchen</a>
+              &copy; 2020 <a href="{{route('myKitchen.visiteur')}}" class="font-weight-bold ml-1" target="_blank">myKitchen</a>
             </div>
           </div>
           <div class="col-lg-6">
             <ul class="nav nav-footer justify-content-center justify-content-lg-end">
               <li class="nav-item">
-                <a href="{{route('myKitchen')}}" class="nav-link" target="_blank">My Kitchen</a>
+                <a href="{{route('myKitchen.visiteur')}}" class="nav-link" target="_blank">My Kitchen</a>
               </li>
               <li class="nav-item">
                 <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>

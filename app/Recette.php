@@ -25,6 +25,14 @@ class Recette extends Model
     {
         return $this->hasMany('App\Ingredient');
     }
+    public function commentaire()
+    {
+        return $this->hasMany('App\Commentaire');
+    }
 
+    public function evaluation()
+    {
+        return $this->hasMany('App\Evaluation');
+    }
     
 }

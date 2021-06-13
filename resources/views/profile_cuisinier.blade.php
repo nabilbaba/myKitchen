@@ -43,9 +43,7 @@
             <li class="nav-item dropdown">
               <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <div class="media align-items-center">
-                  <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="assetsCuisinier/img/theme/bootstrap.jpg">
-                  </span>
+                  
                   <div class="media-body  ml-2  d-none d-lg-block">
                     <span class="mb-0 text-sm  font-weight-bold">{{$cuisinier->first_name}} {{$cuisinier->last_name}}</span>
                   </div>
@@ -60,7 +58,7 @@
                   <span>My profile</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="{{route('myKitchen')}}" class="dropdown-item">
+                <a href="{{route('myKitchen.allRecettes')}}" class="dropdown-item">
                   <i class="ni ni-bold-left"></i>
                   <span>Go to home page</span>
                 </a>
@@ -102,7 +100,7 @@
               <div class="col-lg-3 order-lg-2">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="assetsCuisinier/img/theme/bootstrap.jpg" class="rounded-circle">
+                    
                   </a>
                 </div>
               </div>
@@ -147,8 +145,8 @@
                     <h6 class="heading-small text-muted mb-4">User Information</h6>
                   </div>
                   <div class="col-md-4 text-right">
-                    <a href="#">
-                      <button class="btn btn-outline-warning btn-sm">Edit profile</button>
+                    
+                      <img src="assetsAdmin/icons/modifier.png " alt="..." class="float-right" data-bs-toggle="modal" data-bs-target="#profileCEditModal"  style="cursor: pointer;" data-toggle="tooltip" title="Edit profile" data-placement="top"  />
                     </a> 
                   </div>
                 </div>
@@ -222,6 +220,106 @@
             </div>
           </div>
         </div>
+      </div>
+
+            <!--modal edit profile-->
+      <div class="modal fade " id="profileCEditModal" tabindex="-1"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg ml-10">
+            <div class="modal-content">
+              <div class="modal-header ">
+                <h5 class="modal-title" id="exampleModalLabel">Edit recipe</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body bg-default shadow">
+               
+              <form action="{{ route('profileC.update')}}" method="post">
+                <input type="hidden" name="_method" value="PUT">
+                @csrf
+                <div class="row">
+                  <div class="col-md-8">    
+                     <h6 class="heading-small text-muted mb-4">
+                       Admin Information
+                     </h6>
+                  </div>
+                  <div class="col-md-4 text-right">
+                    
+                      <button class="btn btn-outline-warning btn-sm" type="submit">Update</button>
+                      
+                     
+                  </div>
+                </div>
+                <div class="pl-lg-4 ">
+                  <div class="row ">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label " for="input-number">Phone number</label>
+                        <input type="numero" id="input-number" class="form-control bg-default shadow color-input border-input" name="num" placeholder="phone number" value="{{ $cuisinier->num }}">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-email">Email address</label>
+                        <input type="email" id="input-email" name="email" class="form-control bg-default shadow color-input border-input" placeholder="email"  value="{{ $cuisinier->email }}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-first-name">First name</label>
+                        <input type="text" id="input-first-name" name="first_name" class="form-control bg-default shadow color-input border-input" placeholder="First name"  value="{{$cuisinier->first_name}}">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-last-name">Last name</label>
+                        <input type="text" id="input-last-name" name="last_name" class="form-control bg-default shadow color-input border-input" placeholder="Last name"  value="{{$cuisinier->last_name}}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-date">Date of birth</label>
+                        <input type="Date" id="input-date" name="date_of_birth" class="form-control bg-default shadow color-input border-input" placeholder="Date of birth" value="{{$cuisinier->date_of_birth}}">
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-code-postal">Postal code</label>
+                        <input type="numero" id="input-code_postal" name="code_postal" class="form-control bg-default shadow color-input border-input " placeholder="Postal code"  value="{{$cuisinier->code_postal}}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4" />
+                <!-- Address -->
+                <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-md-10">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-address">Address</label>
+                        <input id="input-address" name="adresse" class="form-control bg-default shadow color-input border-input" placeholder="Home Address"  type="text"  value="{{$cuisinier->adresse}}" >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4" />
+                <!-- Description -->
+                <h6 class="heading-small text-muted mb-4">About me</h6>
+                <div class="pl-lg-4">
+                  <div class="form-group">
+                    <label class="form-control-label" for="textarea-about">About Me</label>
+                    <textarea id="textarea-about" rows="4" class="form-control bg-default shadow color-input border-input" disabled>web site devloper</textarea>
+                  </div>
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>
       </div>
 
 @endsection

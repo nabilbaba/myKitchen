@@ -62,7 +62,7 @@
                   <span>My profile</span>
                 </a>
                 <div class="dropdown-divider"></div>
-                <a href="{{route('myKitchen')}}" class="dropdown-item">
+                <a href="{{route('myKitchen.allRecettes')}}" class="dropdown-item">
                   <i class="ni ni-bold-left"></i>
                   <span>Go to home page</span>
                 </a>

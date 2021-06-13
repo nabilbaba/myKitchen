@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddColumnIngredientsToRecettesTable extends Migration
+class AddColumnImageToRecettesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddColumnIngredientsToRecettesTable extends Migration
     public function up()
     {
         Schema::table('recettes', function (Blueprint $table) {
-            $table->string('ingredients')->after('niveau')->nullable();
+            $table->string('image')->after('titre');
         });
     }
 
@@ -26,7 +26,7 @@ class AddColumnIngredientsToRecettesTable extends Migration
     public function down()
     {
         Schema::table('recettes', function (Blueprint $table) {
-            dropColumn('ingredients');
+            $table->dropColumn('image');
         });
     }
 }

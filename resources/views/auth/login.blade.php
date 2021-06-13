@@ -8,8 +8,7 @@
               <form class="login100-form " method="POST" action="{{ route('login') }}">
                 @csrf
                     <span class="login100-form-title p-b-26">
-                        <h1>My<a href="{{route('myKitchen')}}"><span>Kitchen</span></a>
-                    </h1>
+                        <a href="{{route('myKitchen.visiteur')}}"><b style="color: black;">My</b><span> Kitchen</span></a>
                     </span>
                     <span class="login100-form-title p-b-48">
                         <i class="bi bi-person-circle"></i>
